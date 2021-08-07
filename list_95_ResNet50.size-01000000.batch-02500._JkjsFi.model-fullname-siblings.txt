@@ -1,0 +1,287 @@
+Z181: c330-wood_rabbit, c331-hare
+Z1283: c900-water_tower, c785-seat_belt, c475-car_mirror
+Z18: c612-jinrikisha, c603-horse_cart, c830-stretcher
+Z176: c377-marmoset, c380-titi, c382-squirrel_monkey
+Z1199: c406-altar, c857-throne
+Z1265: c288-leopard, c293-cheetah, c290-jaguar
+Z1186: c624-library, c454-bookshop
+Z1166: c761-remote_control, c487-cellular_telephone
+Z165: c161-basset, c162-beagle
+Z1188: c762-restaurant, c415-bakery
+Z1231: c961-dough, c931-bagel, c932-pretzel, c930-French_loaf, c933-cheeseburger, c964-potpie, c963-pizza
+Z197: c346-water_buffalo, c051-triceratops, c347-bison
+Z170: c338-guinea_pig, c333-hamster, c359-black-footed_ferret
+Z1251: c620-laptop, c681-notebook
+Z1112: c123-spiny_lobster, c124-crayfish, c122-American_lobster
+Z1197: c564-four-poster, c669-mosquito_net
+Z195: c270-white_wolf, c272-coyote, c271-red_wolf, c279-Arctic_fox, c273-dingo, c269-timber_wolf, c274-dhole
+Z1105: c040-American_chameleon, c046-green_lizard
+Z1224: c849-teapot, c550-espresso_maker, c505-coffeepot
+Z1177: c446-binder, c549-envelope, c692-packet
+Z118: c433-bathing_cap, c801-snorkel
+Z1262: c215-Brittany_spaniel, c156-Blenheim_spaniel, c218-Welsh_springer_spaniel
+Z1124: c319-dragonfly, c320-damselfly
+Z1202: c489-chainlink_fence, c912-worm_fence, c716-picket_fence, c703-park_bench
+Z1240: c709-pencil_box, c893-wallet
+Z136: c594-harp, c486-cello, c889-violin
+Z157: c250-Siberian_husky, c249-malamute, c248-Eskimo_dog
+Z1213: c427-barrel, c756-rain_barrel
+Z1152: c728-plastic_bag, c463-bucket, c845-syringe, c696-paintbrush, c898-water_bottle
+Z1175: c771-safe, c613-joystick, c545-electric_fan, c485-CD_player, c492-chest, c477-carpenter's_kit, c688-oscilloscope, c745-projector, c778-scale, c583-guillotine
+Z120: c973-coral_reef, c109-brain_coral
+Z1243: c473-can_opener, c512-corkscrew, c710-pencil_sharpener
+Z1164: c631-lotion, c838-sunscreen
+Z131: c699-panpipe, c558-flute
+Z146: c200-Tibetan_terrier, c213-Irish_setter, c214-Gordon_setter, c188-wire-haired_fox_terrier, c220-Sussex_spaniel, c190-Sealyham_terrier, c226-briard, c175-otterhound, c194-Dandie_Dinmont, c160-Afghan_hound
+Z1146: c658-mitten, c911-wool
+Z1116: c766-rotisserie, c467-butcher_shop, c739-potter's_wheel
+Z1220: c910-wooden_spoon, c618-ladle, c813-spatula, c828-strainer
+Z125: c049-African_crocodile, c050-American_alligator
+Z114: c702-parallel_bars, c416-balance_beam, c602-horizontal_bar
+Z151: c245-French_bulldog, c195-Boston_bull, c151-Chihuahua
+Z1135: c836-sunglass, c837-sunglasses
+Z1159: c630-Loafer, c597-holster, c763-revolver
+Z1272: c839-suspension_bridge, c718-pier
+Z1205: c497-church, c442-bell_cote, c483-castle, c884-vault, c698-palace, c538-dome, c663-monastery
+Z14: c652-military_uniform, c869-trench_coat, c906-Windsor_tie, c465-bulletproof_vest
+Z1254: c848-tape_player, c482-cassette_player
+Z1171: c811-space_heater, c753-radiator
+Z1247: c759-reflex_camera, c622-lens_cap, c732-Polaroid_camera
+Z1160: c770-running_shoe, c502-clog, c774-sandal
+Z1278: c656-minivan, c654-minibus
+Z1163: c684-ocarina, c641-maraca, c455-bottlecap, c451-bolo_tie, c720-pill_bottle, c680-nipple, c714-pick
+Z173: c379-howler_monkey, c378-capuchin, c381-spider_monkey
+Z143: c203-West_Highland_white_terrier, c184-Irish_terrier, c202-soft-coated_wheaten_terrier, c191-Airedale, c192-cairn, c189-Lakeland_terrier
+Z1269: c011-goldfinch, c095-jacamar, c092-bee_eater
+Z187: c093-hornbill, c096-toucan, c088-macaw, c089-sulphur-crested_cockatoo, c087-African_grey, c090-lorikeet
+Z1155: c818-spotlight, c593-harmonica, c650-microphone
+Z1230: c960-chocolate_sauce, c928-ice_cream
+Z1182: c749-quill, c918-crossword_puzzle, c922-menu
+Z162: c355-llama, c354-Arabian_camel
+Z192: c097-drake, c098-red-breasted_merganser, c020-water_ouzel, c136-European_gallinule, c099-goose, c100-black_swan, c137-American_coot
+Z1258: c586-half_track, c471-cannon, c847-tank
+Z184: c081-ptarmigan, c086-partridge, c085-quail, c082-ruffed_grouse, c015-robin
+Z1235: c940-spaghetti_squash, c941-acorn_squash, c945-bell_pepper, c942-butternut_squash
+Z1193: c876-tub, c435-bathtub
+Z198: c690-oxcart, c345-ox
+Z1101: c385-Indian_elephant, c101-tusker, c386-African_elephant
+Z154: c251-dalmatian, c262-Brabancon_griffon, c182-Border_terrier, c254-pug, c164-bluetick, c210-German_short-haired_pointer
+Z194: c278-kit_fox, c280-grey_fox, c277-red_fox
+Z1151: c784-screwdriver, c587-hammer
+Z150: c172-whippet, c171-Italian_greyhound
+Z1234: c943-cucumber, c939-zucchini
+Z164: c167-English_foxhound, c166-Walker_hound
+Z1229: c962-meat_loaf, c965-burrito, c923-plate, c935-mashed_potato, c924-guacamole, c934-hotdog
+Z132: c875-trombone, c513-cornet, c776-sax
+Z175: c295-American_black_bear, c294-brown_bear, c297-sloth_bear
+Z1128: c077-wolf_spider, c070-harvestman, c076-tarantula
+Z1185: c878-typewriter_keyboard, c810-space_bar
+Z1196: c431-bassinet, c516-cradle, c520-crib
+Z1227: c927-trifle, c647-measuring_cup, c438-beaker, c969-eggnog
+Z1178: c478-carton, c519-crate
+Z117: c842-swimming_trunks, c775-sarong
+Z17: c670-motor_scooter, c665-moped
+Z1244: c626-lighter, c711-perfume, c633-loupe
+Z1282: c919-street_sign, c920-traffic_light
+Z1142: c610-jersey, c841-sweatshirt
+Z1139: c655-miniskirt, c514-cowboy_boot, c678-neck_brace
+Z19: c981-ballplayer, c805-soccer_ball, c429-baseball, c768-rugby_ball, c560-football_helmet
+Z1218: c706-patio, c448-birdhouse, c580-greenhouse
+Z1104: c044-alligator_lizard, c041-whiptail, c043-frilled_lizard, c042-agama
+Z1276: c627-limousine, c779-school_bus, c609-jeep, c555-fire_engine, c803-snowplow, c575-golfcart, c468-cab, c517-crane, c408-amphibian, c661-Model_T
+Z121: c327-starfish, c390-eel, c112-conch, c328-sea_urchin, c065-sea_snake, c329-sea_cucumber
+Z1279: c407-ambulance, c734-police_van
+Z1261: c193-Australian_terrier, c201-silky_terrier, c187-Yorkshire_terrier
+Z1189: c423-barber_chair, c424-barbershop
+Z168: c204-Lhasa, c155-Shih-Tzu, c153-Maltese_dog
+Z1250: c508-computer_keyboard, c673-mouse
+Z1238: c584-hair_slide, c616-knot, c464-buckle, c679-necklace, c772-safety_pin, c600-hook
+Z179: c106-wombat, c362-badger, c102-echidna, c363-armadillo, c104-wallaby, c334-porcupine, c361-skunk
+Z1207: c873-triumphal_arch, c708-pedestal, c682-obelisk
+Z1167: c579-grand_piano, c881-upright
+Z113: c566-French_horn, c890-volleyball, c430-basketball
+Z1274: c914-yawl, c724-pirate, c780-schooner
+Z1174: c556-fire_screen, c736-pool_table, c859-toaster, c827-stove, c789-shoji
+Z1216: c707-pay-phone, c480-cash_machine, c704-parking_meter
+Z13: c764-rifle, c413-assault_rifle
+Z189: c127-white_stork, c144-pelican, c128-black_stork
+Z1121: c304-leaf_beetle, c308-fly, c309-bee, c310-ant, c301-ladybug, c307-weevil
+Z1286: c511-convertible, c436-beach_wagon, c479-car_wheel, c581-grille
+Z1115: c296-ice_bear, c974-geyser, c145-king_penguin, c148-killer_whale, c147-grey_whale, c149-dugong, c437-beacon
+Z1120: c712-Petri_dish, c063-Indian_cobra, c111-nematode
+Z1266: c674-mousetrap, c599-honeycomb, c410-apiary
+Z1100: c349-bighorn, c348-ram, c350-ibex
+Z161: c169-borzoi, c176-Saluki
+Z1147: c474-cardigan, c735-poncho, c824-stole
+Z124: c005-electric_ray, c006-stingray
+Z1156: c543-dumbbell, c422-barbell
+Z1275: c417-balloon, c795-ski, c701-parachute
+Z135: c546-electric_guitar, c420-banjo, c402-acoustic_guitar
+Z1204: c888-viaduct, c958-hay, c425-barn, c821-steel_arch_bridge, c525-dam, c449-boathouse
+Z110: c862-torch, c645-maypole, c574-golf_ball, c522-croquet_ball
+Z1285: c676-muzzle, c802-snowmobile, c450-bobsled, c537-dogsled
+Z158: c241-EntleBucher, c239-Bernese_mountain_dog, c240-Appenzeller, c238-Greater_Swiss_Mountain_dog
+Z1132: c887-vestment, c614-kimono, c439-bearskin, c456-bow
+Z1212: c649-megalith, c646-maze, c825-stone_wall
+Z1170: c619-lampshade, c846-table_lamp
+Z1259: c744-projectile, c657-missile
+Z142: c225-malinois, c235-German_shepherd, c227-kelpie
+Z1125: c321-admiral, c322-ringlet, c325-sulphur_butterfly, c326-lycaenid, c324-cabbage_butterfly, c323-monarch
+Z1111: c121-king_crab, c118-Dungeness_crab
+Z140: c196-miniature_schnauzer, c198-standard_schnauzer
+Z1131: c399-abaya, c501-cloak, c568-fur_coat
+Z147: c219-cocker_spaniel, c216-clumber, c212-English_setter, c217-English_springer
+Z1162: c747-punching_bag, c971-bubble, c419-Band_Aid, c902-whistle, c929-ice_lolly
+Z1143: c617-lab_coat, c823-stethoscope, c697-pajama
+Z1181: c539-doormat, c611-jigsaw_puzzle, c741-prayer_rug
+Z129: c956-custard_apple, c988-acorn, c952-fig, c990-buckeye
+Z1201: c687-organ, c814-speedboat, c959-carbonara
+Z1271: c628-liner, c540-drilling_platform, c536-dock
+Z1192: c804-soap_dispenser, c861-toilet_seat, c896-washbasin
+Z1223: c899-water_jug, c725-pitcher, c572-goblet, c883-vase
+Z153: c178-Weimaraner, c168-redbone, c159-Rhodesian_ridgeback, c209-Chesapeake_Bay_retriever, c163-bloodhound, c208-Labrador_retriever, c211-vizsla
+Z1136: c731-plunger, c523-crutch, c608-jean
+Z1255: c640-manhole_cover, c535-disk_brake, c685-odometer
+Z172: c287-lynx, c291-lion, c286-cougar
+Z1248: c664-monitor, c782-screen
+Z1173: c729-plate_rack, c493-chiffonier, c548-entertainment_center
+Z183: c360-otter, c344-hippopotamus, c337-beaver, c150-sea_lion
+Z186: c017-jay, c016-bulbul, c013-junco, c010-brambling, c989-hip, c012-house_finch, c094-hummingbird, c014-indigo_bunting, c018-magpie, c019-chickadee
+Z1245: c426-barometer, c531-digital_watch, c635-magnetic_compass, c826-stopwatch
+Z133: c642-marimba, c822-steel_drum
+Z1130: c311-grasshopper, c312-cricket
+Z1237: c695-padlock, c488-chain
+Z1179: c713-photocopier, c742-printer
+Z1226: c809-soup_bowl, c659-mixing_bowl, c925-consomme, c926-hot_pot
+Z1208: c733-pole, c557-flagpole, c879-umbrella
+Z1129: c313-walking_stick, c315-mantis
+Z152: c179-Staffordshire_bullterrier, c242-boxer, c243-bull_mastiff, c180-American_Staffordshire_terrier
+Z1118: c393-anemone_fish, c108-sea_anemone, c116-chiton
+Z1107: c068-sidewinder, c066-horned_viper
+Z1270: c625-lifeboat, c554-fireboat, c833-submarine, c510-container_ship, c403-aircraft_carrier, c913-wreck
+Z1219: c660-mobile_home, c757-recreational_vehicle
+Z1168: c559-folding_chair, c765-rocking_chair
+Z1150: c740-power_drill, c499-cleaver, c596-hatchet
+Z122: c033-loggerhead, c034-leatherback_turtle
+Z141: c261-keeshond, c255-Leonberg, c207-golden_retriever, c174-Norwegian_elkhound, c244-Tibetan_mastiff, c247-Saint_Bernard
+Z167: c221-Irish_water_spaniel, c206-curly-coated_retriever, c267-standard_poodle
+Z199: c341-hog, c342-wild_boar, c343-warthog
+Z1287: c817-sports_car, c751-racer
+Z1114: c394-sturgeon, c389-barracouta, c395-gar, c391-coho, c000-tench
+Z1195: c750-quilt, c831-studio_couch
+Z193: c146-albatross, c143-oystercatcher, c141-redshank, c142-dowitcher, c140-red-backed_sandpiper, c139-ruddy_turnstone
+Z1103: c047-African_chameleon, c045-Gila_monster, c039-common_iguana, c038-banded_gecko, c048-Komodo_dragon
+Z188: c022-bald_eagle, c021-kite, c023-vulture, c024-great_grey_owl, c091-coucal
+Z156: c232-Border_collie, c230-Shetland_sheepdog, c231-collie
+Z145: c177-Scottish_deerhound, c170-Irish_wolfhound
+Z1141: c636-mailbag, c748-purse
+Z169: c283-Persian_cat, c260-chow, c154-Pekinese, c259-Pomeranian, c332-Angora
+Z1184: c507-combination_lock, c844-switch
+Z178: c376-proboscis_monkey, c364-three-toed_sloth, c384-indri, c103-platypus, c388-giant_panda, c105-koala, c335-fox_squirrel, c387-lesser_panda, c383-Madagascar_cat
+Z1273: c484-catamaran, c871-trimaran
+Z1215: c781-scoreboard, c886-vending_machine, c800-slot, c571-gas_pump, c498-cinema, c398-abacus, c877-turnstile
+Z1110: c027-eft, c025-European_fire_salamander, c026-common_newt, c028-spotted_salamander
+Z1225: c967-espresso, c968-cup, c504-coffee_mug
+Z1148: c601-hoopskirt, c689-overskirt
+Z1191: c589-hand_blower, c585-hair_spray
+Z1284: c727-planetarium, c807-solar_dish, c755-radio_telescope
+Z1133: c552-feather_boa, c903-wig
+Z1122: c126-isopod, c078-tick, c318-lacewing, c317-leafhopper, c069-trilobite, c316-cicada, c075-black_widow
+Z1157: c577-gong, c494-chime
+Z1267: c984-rapeseed, c986-yellow_lady's_slipper, c993-gyromitra
+Z1180: c916-web_site, c917-comic_book, c921-book_jacket
+Z16: c791-shopping_cart, c870-tricycle, c880-unicycle
+Z1211: c915-yurt, c672-mountain_tent, c444-bicycle-built-for-two, c671-mountain_bike, c970-alp, c980-volcano
+Z160: c236-Doberman, c234-Rottweiler, c237-miniature_pinscher
+Z177: c370-guenon, c374-langur, c371-patas, c373-macaque, c372-baboon, c375-colobus
+Z190: c132-American_egret, c134-crane, c135-limpkin, c131-little_blue_heron, c133-bittern
+Z1183: c798-slide_rule, c605-iPod, c590-hand-held_computer, c481-cassette
+Z149: c158-toy_terrier, c268-Mexican_hairless, c253-basenji, c246-Great_Dane, c173-Ibizan_hound
+Z1233: c998-ear, c987-corn
+Z1249: c851-television, c598-home_theater
+Z148: c258-Samoyed, c222-kuvasz, c257-Great_Pyrenees, c229-Old_English_sheepdog, c228-komondor
+Z1172: c799-sliding_door, c905-window_shade, c904-window_screen
+Z182: c299-meerkat, c336-marmot, c298-mongoose
+Z1119: c001-goldfish, c029-axolotl, c107-jellyfish, c117-chambered_nautilus, c392-rock_beauty, c397-puffer
+Z111: c722-ping-pong_ball, c719-piggy_bank, c752-racket, c852-tennis_ball
+Z1161: c653-milk_can, c469-caldron, c666-mortar, c738-pot
+Z1144: c452-bonnet, c885-velvet, c459-brassiere, c850-teddy
+Z1222: c470-candle, c966-red_wine, c855-thimble, c503-cocktail_shaker, c773-saltshaker, c868-tray, c441-beer_glass
+Z116: c445-bikini, c639-maillot, c638-maillot
+Z1137: c515-cowboy_hat, c808-sombrero
+Z1117: c396-lionfish, c983-scuba_diver, c110-flatworm, c115-sea_slug
+Z128: c996-hen-of-the-woods, c947-mushroom, c991-coral_fungus, c997-bolete, c992-agaric, c995-earthstar, c994-stinkhorn
+Z171: c284-Siamese_cat, c282-tiger_cat, c285-Egyptian_cat, c281-tabby
+Z1126: c944-artichoke, c985-daisy, c946-cardoon
+Z1106: c059-vine_snake, c055-green_snake, c064-green_mamba
+Z139: c205-flat-coated_retriever, c256-Newfoundland, c224-groenendael, c223-schipperke
+Z1281: c547-electric_locomotive, c565-freight_car, c829-streetcar, c705-passenger_car, c820-steam_locomotive
+Z1200: c723-pinwheel, c533-dishrag, c816-spindle
+Z12: c792-shovel, c428-barrow
+Z1203: c562-fountain, c421-bannister, c743-prison
+Z159: c339-sorrel, c165-black-and-tan_coonhound, c607-jack-o'-lantern
+Z1256: c730-plow, c595-harvester, c866-tractor, c856-thresher
+Z1209: c460-breakwater, c977-sandbar, c978-seashore, c975-lakeside
+Z115: c667-mortarboard, c400-academic_gown
+Z1165: c551-face_powder, c686-oil_filter, c629-lipstick, c746-puck
+Z1257: c604-hourglass, c715-pickelhaube, c726-plane, c901-whiskey_jug
+Z1176: c897-washer, c760-refrigerator, c651-microwave, c534-dishwasher
+Z1214: c637-mailbox, c412-ashcan
+Z1246: c892-wall_clock, c409-analog_clock, c530-digital_clock
+Z180: c357-mink, c356-weasel, c358-polecat
+Z1140: c797-sleeping_bag, c793-shower_cap, c414-backpack
+Z1108: c056-king_snake, c061-boa_constrictor, c067-diamondback, c058-water_snake, c062-rock_python, c054-hognose_snake, c060-night_snake
+Z196: c276-hyena, c275-African_hunting_dog
+Z127: c114-slug, c113-snail
+Z138: c233-Bouvier_des_Flandres, c197-giant_schnauzer, c199-Scotch_terrier, c183-Kerry_blue_terrier
+Z1252: c553-file, c527-desktop_computer, c526-desk
+Z1198: c790-shopping_basket, c588-hamper
+Z137: c854-theater_curtain, c819-stage
+Z1241: c418-ballpoint, c767-rubber_eraser, c563-fountain_pen, c769-rule
+Z119: c472-canoe, c693-paddle
+Z1169: c894-wardrobe, c495-china_cabinet, c532-dining_table, c453-bookcase
+Z1268: c030-bullfrog, c032-tailed_frog, c031-tree_frog
+Z1153: c700-paper_towel, c999-toilet_tissue
+Z123: c037-box_turtle, c036-terrapin, c035-mud_turtle
+Z1263: c152-Japanese_spaniel, c157-papillon, c252-affenpinscher
+Z1194: c648-medicine_chest, c434-bath_towel, c794-shower_curtain
+Z1187: c860-tobacco_shop, c509-confectionery, c788-shoe_shop, c582-grocery_store, c865-toyshop
+Z166: c266-miniature_poodle, c265-toy_poodle, c181-Bedlington_terrier
+Z134: c541-drum, c542-drumstick, c401-accordion
+Z1236: c938-cauliflower, c937-broccoli, c936-head_cabbage
+Z1109: c053-ringneck_snake, c052-thunder_snake, c057-garter_snake
+Z1228: c521-Crock_Pot, c891-waffle_iron, c528-dial_telephone
+Z1217: c835-sundial, c458-brass, c853-thatch, c858-tile_roof
+Z155: c263-Pembroke, c264-Cardigan
+Z11: c634-lumbermill, c843-swing, c621-lawn_mower, c491-chain_saw
+Z1138: c615-knee_pad, c518-crash_helmet, c691-oxygen_mask, c570-gasmask, c796-ski_mask, c643-mask
+Z144: c186-Norwich_terrier, c185-Norfolk_terrier
+Z174: c367-chimpanzee, c369-siamang, c368-gibbon, c366-gorilla, c365-orangutan
+Z1127: c815-spider_web, c073-barn_spider, c072-black_and_gold_garden_spider, c074-garden_spider
+Z1113: c314-cockroach, c306-rhinoceros_beetle, c079-centipede, c071-scorpion, c125-hermit_crab, c120-fiddler_crab, c119-rock_crab
+Z112: c737-pop_bottle, c907-wine_bottle, c440-beer_bottle
+Z1264: c289-snow_leopard, c500-cliff_dwelling, c292-tiger
+Z1145: c721-pillow, c529-diaper, c411-apron, c496-Christmas_stocking, c806-sock, c443-bib, c591-handkerchief
+Z1102: c352-impala, c340-zebra, c353-gazelle, c351-hartebeest
+Z1190: c606-iron, c786-sewing_machine, c882-vacuum
+Z1206: c863-totem_pole, c668-mosque, c506-coil, c405-airship, c476-carousel, c832-stupa, c576-gondola, c694-paddlewheel
+Z1232: c957-pomegranate, c953-pineapple, c954-banana, c955-jackfruit, c949-strawberry, c951-lemon, c948-Granny_Smith, c950-orange
+Z130: c432-bassoon, c683-oboe
+Z1239: c783-screw, c677-nail
+Z1277: c867-trailer_truck, c561-forklift, c675-moving_van, c717-pickup, c864-tow_truck, c569-garbage_truck
+Z1158: c787-shield, c490-chain_mail, c461-breastplate, c524-cuirass
+Z1221: c544-Dutch_oven, c567-frying_pan, c909-wok
+Z15: c758-reel, c447-binoculars, c872-tripod
+Z1210: c976-promontory, c972-cliff, c979-valley
+Z1134: c457-bow_tie, c834-suit
+Z1253: c662-modem, c592-hard_disc, c754-radio, c632-loudspeaker
+Z1123: c300-tiger_beetle, c302-ground_beetle, c305-dung_beetle, c303-long-horned_beetle
+Z1280: c466-bullet_train, c874-trolleybus, c573-go-kart
+Z1242: c644-matchstick, c623-letter_opener, c777-scabbard
+Z185: c138-bustard, c083-prairie_chicken, c080-black_grouse, c009-ostrich
+Z1260: c812-space_shuttle, c404-airliner, c908-wing, c895-warplane
+Z1149: c982-groom, c578-gown
+Z191: c130-flamingo, c084-peacock, c129-spoonbill
+Z163: c007-cock, c008-hen
+Z126: c003-tiger_shark, c004-hammerhead, c002-great_white_shark
+Z1154: c840-swab, c462-broom

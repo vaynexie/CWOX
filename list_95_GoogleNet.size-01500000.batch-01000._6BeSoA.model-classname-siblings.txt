@@ -1,0 +1,410 @@
+Z181: cardoon, artichoke
+Z1283: pitcher, vase
+Z18: European_fire_salamander, spotted_salamander
+Z1350: remote_control, iPod, cellular_telephone, cassette
+Z176: milk_can, birdhouse, pot
+Z1199: rhinoceros_beetle, black_widow, dung_beetle, tick
+Z1343: television, home_theater
+Z1265: shield, chain_mail
+Z1186: German_short-haired_pointer, bluetick
+Z1166: fireboat, container_ship, lifeboat
+Z1377: schipperke, groenendael
+Z1325: purse, mailbag, wallet
+Z1381: Irish_water_spaniel, standard_poodle
+Z165: boathouse, lakeside
+Z1188: black-and-tan_coonhound, pug, muzzle
+Z1231: seat_belt, car_mirror
+Z197: oxygen_mask, gasmask
+Z170: butternut_squash, spaghetti_squash, acorn_squash
+Z1251: bannister, coil
+Z1112: pretzel, bagel
+Z1197: cicada, leafhopper, harvestman, lacewing
+Z1329: knot, spindle, nematode
+Z195: overskirt, hoopskirt
+Z1105: wok, frying_pan
+Z1224: eel, sea_snake
+Z1398: Leonberg, Saint_Bernard
+Z1290: photocopier, printer
+Z1336: spatula, cleaver
+Z1177: mountain_bike, bicycle-built-for-two
+Z118: proboscis_monkey, fox_squirrel
+Z1262: accordion, banjo, harp
+Z1124: steel_arch_bridge, pier, suspension_bridge
+Z1202: ladybug, leaf_beetle
+Z1354: web_site, hand-held_computer
+Z1240: slot, tobacco_shop, vending_machine
+Z136: terrapin, box_turtle, mud_turtle
+Z1408: Border_collie, collie
+Z1347: electric_guitar, acoustic_guitar
+Z1388: Irish_terrier, Border_terrier, soft-coated_wheaten_terrier
+Z157: ibex, bison, warthog
+Z1213: sea_anemone, anemone_fish
+Z1152: half_track, tank
+Z1175: volleyball, bathing_cap, basketball
+Z120: wallaby, wombat
+Z1243: moped, motor_scooter
+Z1321: cardigan, sock
+Z1164: bustard, ostrich
+Z131: pelican, albatross, sulphur-crested_cockatoo, spoonbill
+Z146: European_gallinule, American_coot
+Z1146: harvester, thresher
+Z1116: mosque, dome
+Z1220: great_white_shark, tiger_shark
+Z1370: whippet, Italian_greyhound
+Z125: cheetah, rapeseed
+Z1289: safe, file, chiffonier
+Z1294: washer, dishwasher
+Z1332: bottlecap, running_shoe, lens_cap, African_grey
+Z114: colobus, langur
+Z151: white_wolf, timber_wolf
+Z1135: ski, disk_brake, reel
+Z1159: passenger_car, streetcar, trolleybus
+Z1360: space_bar, typewriter_keyboard
+Z1358: carpenter's_kit, mousetrap, plane
+Z1310: handkerchief, pillow
+Z1391: wire-haired_fox_terrier, Sealyham_terrier, Bedlington_terrier
+Z1272: binoculars, tripod
+Z1205: ant, spider_web
+Z1303: bakery, restaurant
+Z14: agama, frilled_lizard, common_iguana, Komodo_dragon
+Z1254: ballpoint, letter_opener
+Z1171: maillot-c638, bikini, maillot-c639
+Z1247: sunglasses, sunglass
+Z1297: space_heater, radiator
+Z1160: grand_piano, upright
+Z1278: face_powder, Petri_dish
+Z1397: Tibetan_terrier, briard, Afghan_hound
+Z1163: Arabian_camel, llama
+Z173: orange, lemon
+Z143: indigo_bunting, jay, magpie
+Z1314: bath_towel, diaper, ice_lolly, nipple
+Z1269: drumstick, drum
+Z187: suit, trench_coat
+Z1155: tricycle, lawn_mower
+Z1395: komondor, Maltese_dog, Old_English_sheepdog
+Z1230: bullet_train, limousine
+Z1182: sundial, brass
+Z162: ice_bear, brown_bear
+Z192: academic_gown, mortarboard
+Z1258: buckle, bolo_tie, hair_slide, necklace
+Z1366: boxer, bull_mastiff
+Z1400: malamute, Norwegian_elkhound
+Z184: daisy, cabbage_butterfly
+Z1235: beer_bottle, pop_bottle
+Z1193: tailed_frog, bullfrog
+Z198: punching_bag, plastic_bag, brassiere
+Z1382: miniature_poodle, toy_poodle
+Z1101: mortar, Dutch_oven, potter's_wheel
+Z154: kit_fox, red_fox
+Z194: gown, groom
+Z1151: amphibian, speedboat
+Z150: kelpie, dingo, Ibizan_hound
+Z1399: German_shepherd, malinois
+Z1384: Brabancon_griffon, affenpinscher
+Z1320: velvet, dishrag, fur_coat
+Z1234: sports_car, racer
+Z1367: Staffordshire_bullterrier, American_Staffordshire_terrier
+Z164: geyser, volcano
+Z1229: traffic_light, street_sign, parking_meter
+Z1353: notebook, laptop
+Z132: American_egret, little_blue_heron
+Z175: mushroom, agaric
+Z1128: breakwater, promontory
+Z1185: Walker_hound, English_foxhound
+Z1196: grasshopper, cricket
+Z1346: pool_table, jigsaw_puzzle, jack-o'-lantern
+Z1362: oil_filter, whiskey_jug, odometer
+Z1227: cab, school_bus
+Z1178: soccer_ball, rugby_ball
+Z117: hare, wood_rabbit
+Z17: common_newt, eft
+Z1335: toilet_tissue, paper_towel
+Z1244: crash_helmet, football_helmet
+Z1282: teapot, coffeepot
+Z1142: bucket, caldron
+Z1139: projectile, missile
+Z1301: window_shade, window_screen
+Z19: capuchin, squirrel_monkey, howler_monkey, spider_monkey
+Z1218: stingray, electric_ray
+Z1104: king_crab, Dungeness_crab
+Z1373: Pomeranian, Pekinese
+Z1276: measuring_cup, strainer
+Z121: porcupine, echidna, armadillo
+Z1279: eggnog, trifle
+Z1261: sax, cornet, trombone
+Z1189: Rottweiler, Doberman
+Z1324: stopwatch, digital_watch
+Z168: banana, pineapple
+Z1250: unicycle, shopping_cart, umbrella
+Z1238: shoe_shop, toyshop
+Z179: buckeye, acorn
+Z1207: conch, hermit_crab
+Z1342: holster, revolver, hatchet, scabbard
+Z1167: paddlewheel, submarine, aircraft_carrier, gondola
+Z113: macaque, baboon
+Z1274: rifle, assault_rifle
+Z1174: parachute, balloon
+Z1216: sturgeon, coho, gar
+Z1293: soap_dispenser, washbasin
+Z13: king_penguin, hippopotamus, triceratops, earthstar, water_snake, tarantula, koala, Mexican_hairless, manhole_cover, Indian_cobra
+Z189: jean, miniskirt
+Z1121: radio_telescope, solar_dish
+Z1410: cocker_spaniel, Blenheim_spaniel
+Z1286: tray, menu
+Z1115: thatch, tile_roof, totem_pole, bell_cote, stupa
+Z1316: stole, poncho
+Z1120: vault, organ
+Z1266: feather_boa, wig
+Z1349: projector, electric_fan, digital_clock, spotlight
+Z1100: backpack, sleeping_bag
+Z161: American_black_bear, sloth_bear
+Z1374: Persian_cat, keeshond, chow
+Z1308: fountain_pen, quill, crossword_puzzle
+Z1147: oxcart, ox
+Z124: leopard, snow_leopard, jaguar
+Z1313: Band_Aid, pill_bottle
+Z1156: golfcart, Model_T, go-kart
+Z1275: cocktail_shaker, beaker, hourglass
+Z135: otter, beaver
+Z1204: garden_spider, black_and_gold_garden_spider
+Z110: three-toed_sloth, siamang, orangutan, gibbon
+Z1285: saltshaker, piggy_bank
+Z158: flamingo, peacock, sorrel
+Z1389: Norfolk_terrier, Norwich_terrier
+Z1132: flagpole, pole
+Z1212: lionfish, puffer
+Z1170: wing, airliner, warplane
+Z1259: flute, oboe, bassoon
+Z142: hornbill, toucan
+Z1298: mosquito_net, crib, four-poster, shower_curtain
+Z1125: dam, viaduct
+Z1111: chocolate_sauce, ice_cream
+Z140: macaw, lorikeet
+Z1319: quilt, studio_couch
+Z1131: crane-c517, drilling_platform
+Z147: bittern, limpkin
+Z1405: borzoi, Saluki
+Z1390: Lakeland_terrier, Airedale
+Z1162: rocking_chair, folding_chair
+Z1143: rain_barrel, barrel
+Z1181: stone_wall, megalith
+Z1378: Tibetan_mastiff, Newfoundland
+Z129: kite, bald_eagle, vulture, great_grey_owl
+Z1363: dalmatian, Great_Dane, English_setter, Weimaraner
+Z1357: hard_disc, CD_player
+Z1201: weevil, long-horned_beetle
+Z1271: Polaroid_camera, reflex_camera
+Z1192: African_chameleon, tree_frog
+Z1385: otterhound, Dandie_Dinmont
+Z1302: altar, throne
+Z1223: snorkel, scuba_diver
+Z153: ram, bighorn
+Z1136: lumbermill, chain_saw
+Z1380: curly-coated_retriever, flat-coated_retriever
+Z1331: ping-pong_ball, tennis_ball
+Z1255: corkscrew, can_opener
+Z172: pomegranate, Granny_Smith, fig, bell_pepper, strawberry
+Z1248: cowboy_hat, sombrero
+Z1403: Bernese_mountain_dog, Greater_Swiss_Mountain_dog
+Z1173: racket, bubble, torch
+Z183: damselfly, dragonfly
+Z186: bee, fly
+Z1394: Samoyed, Great_Pyrenees, kuvasz
+Z1409: Brittany_spaniel, Welsh_springer_spaniel, English_springer
+Z1309: doormat, prayer_rug
+Z1304: china_cabinet, dining_table
+Z1245: Loafer, cowboy_boot
+Z133: goose, black_swan, crane-c134
+Z1368: French_bulldog, Boston_bull
+Z1130: freight_car, electric_locomotive
+Z1237: bookshop, library
+Z1179: croquet_ball, golf_ball
+Z1226: minivan, minibus
+Z1208: fiddler_crab, rock_crab
+Z1129: dogsled, snowmobile
+Z152: hartebeest, impala, gazelle
+Z1118: monastery, palace
+Z1334: plate_rack, espresso_maker, chest, slide_rule, abacus, dial_telephone, barometer
+Z1107: consomme, plate
+Z1352: screen, monitor
+Z1270: marimba, steel_drum
+Z1219: dugong, platypus, hammerhead
+Z1168: trimaran, catamaran
+Z1150: snowplow, cliff_dwelling, wreck, jeep
+Z122: skunk, badger
+Z141: bee_eater, jacamar, bulbul, hummingbird, coucal
+Z1340: paintbrush, syringe
+Z167: ear, corn
+Z199: ski_mask, mask
+Z1287: beer_glass, espresso
+Z1323: loupe, magnetic_compass
+Z1338: hand_blower, power_drill, hair_spray, vacuum, iron, microphone
+Z1327: screw, nail
+Z1114: French_loaf, dough, potpie
+Z1195: garter_snake, whiptail, alligator_lizard
+Z193: vestment, kimono
+Z1103: American_lobster, spiny_lobster, crayfish
+Z1401: Siberian_husky, Eskimo_dog
+Z188: bow_tie, Windsor_tie
+Z156: hog, wild_boar
+Z1296: fire_screen, stove
+Z145: ruffed_grouse, partridge
+Z1141: swab, broom
+Z169: cucumber, zucchini
+Z1184: patio, greenhouse
+Z1317: pajama, shower_cap, apron
+Z178: custard_apple, jackfruit
+Z1345: stage, theater_curtain
+Z1306: carton, crate
+Z1273: bobsled, military_uniform, stretcher, bow
+Z1215: flatworm, sea_slug
+Z1315: mitten, wool
+Z1110: carbonara, guacamole, pizza
+Z1225: garbage_truck, moving_van
+Z1148: horse_cart, jinrikisha
+Z1337: wooden_spoon, ladle
+Z1295: refrigerator, microwave, medicine_chest
+Z1191: green_snake, green_mamba, vine_snake
+Z1284: water_jug, water_bottle
+Z1133: dock, liner
+Z1292: bathtub, tub
+Z1122: water_tower, beacon
+Z1312: comic_book, book_jacket
+Z1157: recreational_vehicle, mobile_home
+Z1351: computer_keyboard, mouse
+Z1386: Sussex_spaniel, clumber
+Z1267: maraca, ocarina, harmonica
+Z1341: hammer, screwdriver
+Z1180: ballplayer, baseball
+Z16: horned_viper, sidewinder
+Z1211: brain_coral, coral_reef
+Z160: chimpanzee, gorilla
+Z177: apiary, honeycomb
+Z190: sweatshirt, jersey
+Z1183: chainlink_fence, picket_fence, worm_fence
+Z1375: giant_schnauzer, Bouvier_des_Flandres
+Z1305: hamper, shopping_basket
+Z149: red-breasted_merganser, drake
+Z1233: grille, car_wheel
+Z1348: analog_clock, wall_clock
+Z1249: crutch, plunger
+Z1364: Chesapeake_Bay_retriever, Labrador_retriever, golden_retriever
+Z1402: EntleBucher, Appenzeller
+Z148: prairie_chicken, black_grouse
+Z1172: sarong, swimming_trunks
+Z182: axolotl, goldfish, rock_beauty
+Z1119: castle, church
+Z111: titi, marmoset
+Z1161: guillotine, prison
+Z1144: ashcan, mailbox
+Z1222: leatherback_turtle, loggerhead
+Z116: tiger, giant_panda, lesser_panda
+Z1137: barn, hay
+Z1117: obelisk, triumphal_arch
+Z1330: barbell, dumbbell
+Z128: mink, marmot, Arctic_fox
+Z1356: radio, loudspeaker, modem
+Z171: broccoli, cauliflower, head_cabbage
+Z1126: paddle, canoe
+Z1106: hot_pot, Crock_Pot
+Z139: ptarmigan, water_ouzel
+Z1281: coffee_mug, cup
+Z1200: tiger_beetle, ground_beetle
+Z1393: silky_terrier, Australian_terrier, Yorkshire_terrier
+Z1406: Cardigan, Pembroke
+Z12: boa_constrictor, rock_python
+Z1203: wolf_spider, barn_spider
+Z159: tusker, African_elephant, water_buffalo, Indian_elephant, zebra
+Z1379: Irish_setter, Gordon_setter
+Z1300: sliding_door, shoji
+Z1256: pick, safety_pin, puck, whistle, matchstick
+Z1209: slug, snail
+Z115: indri, Madagascar_cat
+Z1165: hyena, African_hunting_dog
+Z1257: perfume, pencil_sharpener, thimble, lighter, lipstick
+Z1176: balance_beam, horizontal_bar, parallel_bars
+Z1214: sea_cucumber, starfish, sea_urchin
+Z1404: Irish_wolfhound, Scottish_deerhound
+Z1246: sandal, clog
+Z180: hip, goldfinch, yellow_lady's_slipper
+Z1140: steam_locomotive, cannon
+Z1108: mashed_potato, meat_loaf
+Z1307: rule, rubber_eraser
+Z1318: Christmas_stocking, bib
+Z196: neck_brace, knee_pad, bulletproof_vest
+Z127: weasel, polecat
+Z138: oystercatcher, redshank, ruddy_turnstone
+Z1252: pay-phone, cash_machine, gas_pump
+Z1198: scorpion, isopod, centipede, cockroach
+Z137: dowitcher, red-backed_sandpiper
+Z1359: oscilloscope, joystick
+Z1311: envelope, packet
+Z1241: butcher_shop, rotisserie
+Z1288: entertainment_center, bookcase, wardrobe
+Z119: cock, hen
+Z1169: space_shuttle, airship, scoreboard
+Z1299: bassinet, cradle
+Z1328: hook, chain, padlock
+Z1371: black-footed_ferret, Egyptian_cat, Siamese_cat
+Z1268: gong, chime
+Z1339: lab_coat, stethoscope
+Z1153: pinwheel, maypole, carousel
+Z123: mongoose, meerkat
+Z1263: pickelhaube, bearskin, French_horn, panpipe
+Z1194: thunder_snake, ringneck_snake
+Z1369: miniature_pinscher, Chihuahua, toy_terrier
+Z1187: basset, beagle
+Z166: seashore, sandbar
+Z1326: pencil_box, binder
+Z134: African_crocodile, American_alligator
+Z1236: red_wine, wine_bottle
+Z1109: mixing_bowl, soup_bowl
+Z1344: table_lamp, lampshade
+Z1228: fire_engine, police_van, ambulance
+Z1217: tench, barracouta
+Z155: coyote, grey_fox, dhole, red_wolf
+Z11: hognose_snake, night_snake
+Z1138: pedestal, fountain
+Z1396: Lhasa, Shih-Tzu
+Z144: junco, robin, house_finch, brambling, chickadee, quail
+Z174: bolete, gyromitra, coral_fungus, stinkhorn, hen-of-the-woods
+Z1127: schooner, pirate, yawl
+Z1383: Kerry_blue_terrier, Scotch_terrier
+Z1113: cheeseburger, burrito, hotdog
+Z112: guenon, patas
+Z1264: cuirass, breastplate
+Z1145: plow, tractor
+Z1102: hamster, Angora, guinea_pig
+Z1376: standard_schnauzer, miniature_schnauzer
+Z1190: green_lizard, American_chameleon
+Z1206: mantis, walking_stick
+Z1232: beach_wagon, pickup, convertible
+Z1322: bonnet, teddy
+Z130: white_stork, black_stork
+Z1365: bloodhound, Rhodesian_ridgeback, vizsla, redbone
+Z1239: barbershop, barber_chair
+Z1277: sunscreen, lotion
+Z1158: yurt, mountain_tent
+Z1387: Japanese_spaniel, papillon
+Z1221: grey_whale, sea_lion, killer_whale
+Z15: king_snake, Gila_monster, diamondback, banded_gecko
+Z1210: chiton, trilobite, chambered_nautilus, jellyfish
+Z1134: barrow, shovel
+Z1291: desk, desktop_computer
+Z1333: waffle_iron, scale, sewing_machine, toaster, toilet_seat
+Z1253: turnstile, forklift
+Z1123: maze, cinema, planetarium
+Z1280: candle, goblet
+Z1242: confectionery, grocery_store
+Z185: ringlet, admiral, lycaenid, monarch, sulphur_butterfly
+Z1392: West_Highland_white_terrier, cairn
+Z1407: basenji, Shetland_sheepdog
+Z1260: cello, violin
+Z1149: tow_truck, trailer_truck
+Z191: abaya, cloak
+Z163: valley, alp, cliff
+Z1372: tiger_cat, tabby
+Z1355: cassette_player, tape_player
+Z1361: switch, combination_lock
+Z126: lynx, lion, cougar
+Z1154: swing, park_bench

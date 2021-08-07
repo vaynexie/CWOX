@@ -1,4 +1,3 @@
-
 ## **Forked from https://github.com/kmpoon/hlta-xai**
 
 ## HLTM for XAI
@@ -76,8 +75,8 @@ In the above, `output_name` is the name of the output tree, `output_name` is the
 We use ResNet50 and GoogleNet in the case of ImageNet Image Classification as examples. The whole output trees for the two models can be seen in:
 
 <!-- TOC -->
-- ResNet50 -- [Tree](https://hkust-huawei-xai.github.io/final_submit/resnet50), [Resutled JSON file](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/HLTM/result_json/ResNet50.json) ;  
-- GoogleNet -- [Tree](https://hkust-huawei-xai.github.io/final_submit/googlenet), [Resutled JSON file](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/HLTM/result_json/GoogleNet.json) .
+- ResNet50 -- [Tree](https://vaynexie.github.io/CWOX/resnet50), [Resutled JSON file](https://github.com/vaynexie/CWOX/blob/main/HLTM/result_json/ResNet50.json) ;  
+- GoogleNet -- [Tree](https://vaynexie.github.io/CWOX/googlenet), [Resutled JSON file](https://github.com/vaynexie/CWOX/blob/main/HLTM/result_json/GoogleNet.json) .
 <!-- TOC -->
 
 For easy comprehension, a representative image of each class is included in the tree structures. Those images are not a part of the models. 
@@ -89,9 +88,3 @@ For easy comprehension, a representative image of each class is included in the 
 <div align="center">
  <b>Part of a hierarchical latent tree model (HLTM) obtained for ResNet50</b>
 </div>
-
-
-
-
-
-

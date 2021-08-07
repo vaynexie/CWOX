@@ -18,11 +18,11 @@ We provide Pytorch Implementation and Mindspore Implementation for CWOX:
 <!-- TOC -->
 - Pytorch Implementation - this branch
 
-- [Mindspore Implementation](https://github.com/HKUST-HUAWEI-XAI/CWOX/tree/mindspore)
+- [Mindspore Implementation](https://github.com/vaynexie/CWOX/tree/mindspore)
 
 <!-- /TOC -->
 
-## [A. Label Confusion Clusters Idenification](https://github.com/HKUST-HUAWEI-XAI/CWOX/tree/main/HLTM)
+## [A. Label Confusion Clusters Idenification](https://github.com/vaynexie/CWOX/tree/main/HLTM)
 
 CWOX has a preprocessing step that partitions all class labels into confusion clusters with respect to the classifier to be explained. Classes in each of those clusters (e.g., cello, violin) are confusing to the classifier, and are often competing labels for the same object/region in the input image. CWOX does so by analyzing the co-occurrence of labels in classification results and thereby building a hierarchical latent tree model (HLTM):
 
@@ -34,7 +34,7 @@ CWOX has a preprocessing step that partitions all class labels into confusion cl
  <b>Figure 2</b>
 </div>
 
-The codes for learning HLTMs are given in the sub-directory [HLTM](https://github.com/HKUST-HUAWEI-XAI/CWOX/tree/main/HLTM), along with the structures of the models obtained for [ResNet50](https://hkust-huawei-xai.github.io/final_submit/resnet50) and [GoogleNet](https://hkust-huawei-xai.github.io/final_submit/googlenet).
+The codes for learning HLTMs are given in the sub-directory [HLTM](https://github.com/vaynexie/CWOX/tree/main/HLTM), along with the structures of the models obtained for [ResNet50](https://vaynexie.github.io/final_submit/resnet50) and [GoogleNet](https://vaynexie.github.io/final_submit/googlenet).
 
 When interpreting the output of the classifier on a target image, CWOX obtains a subtree for the top classes by removing from the HLTM all the irrelevant nodes. The top classes are partitioned into **Label Confusion Clusters** by cutting the subtree at a certain level, the default being the lowest level. This is how the two clusters in Figure 1 are obtained from the tree in Figure 2. 
 
@@ -47,7 +47,7 @@ Partition the Top-k labels into different clusters.
 User can select different cut_level to be used. In default, we apply the latent node in lowest level (cut_level=0) to divide the top classes into clusters.
 
 The JSON files including the HLTM information we obtained for ImageNet Image Classification: ResNet50.json and GoogleNet.json can be found in 
-https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/HLTM/result_json or https://github.com/HKUST-HUAWEI-XAI/CWOX/tree/main/resources
+https://github.com/vaynexie/CWOX/blob/main/HLTM/result_json or https://github.com/vaynexie/CWOX/tree/main/resources
 '''
 from CWOX.apply_hltm import *
 clusterify_resnet50 = apply_hltm(cut_level=0,json_path="ResNet50.json")
@@ -71,7 +71,7 @@ Cluster 1: cello, violin; Cluster 2: acoustic guitar, banjo, electric guitar.
 For the following discussions, we assume the top classes for an input x are partitioned into clusters: ![math](https://latex.codecogs.com/svg.image?\inline&space;C_1=\{c_{11},c_{12},\cdots\};C_2=\{c_{21},c_{22},\cdots\};\cdots).
 
 -----------------------------------------------------------------------------------------------------------------------
-## [B. CWOX](https://github.com/HKUST-HUAWEI-XAI/CWOX/tree/main/CWOX)
+## [B. CWOX](https://github.com/vaynexie/CWOX/tree/main/CWOX)
 
 CWOX requires a base explainer, which can be any existing explanation methods, such as Grad-CAM, MWP, LIME and RISE, that yield nonnegative heatmaps. CWOX first runs the base explainer on the confusion clusters (C_i’s) and the individual classes (c_ij’s), and then combines the base heatmaps to form contrastive heatmaps.
 
@@ -81,21 +81,21 @@ CWOX requires a base explainer, which can be any existing explanation methods, s
 A score function is needed in order to produce a base heatmap for a class c. It is usually either the logit ![math](https://latex.codecogs.com/svg.image?z_c(\textbf{x})) of the class (for Grad-CAM and MWP) or the probability ![math](https://latex.codecogs.com/svg.image?p(c|\mathbf{x})) of the class (for RISE and LIME). For confusion clusters, the logit is replaced by the generalized logit ![math](https://latex.codecogs.com/svg.image?\inline&space;z_{\textbf{C}}=log\sum_{c\in\textbf{C}}{e}^{z_c}) and the probability is replaced by the probability of the cluster ![math](https://latex.codecogs.com/svg.image?\inline&space;p(\textbf{C}|\mathbf{x})=\sum_{c\in\textbf{C}}P(c|\mathbf{x})).
 
 
-* [CWOX.IOX(algo)](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/CWOX/IOX.py): Produces a base heatmap using explanation method named algo. Currently, algo = “Grad-CAM”, “MWP”, “RISE”, or “LIME” are supported.
+* [CWOX.IOX(algo)](https://github.com/vaynexie/CWOX/blob/main/CWOX/IOX.py): Produces a base heatmap using explanation method named algo. Currently, algo = “Grad-CAM”, “MWP”, “RISE”, or “LIME” are supported.
 
-   * [CWOX.grad_cam_cwox](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/CWOX/grad_cam_cwox.py): Produces a base heatmap with Grad-CAM;
-   * [CWOX.excitationbackprop_cwox](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/CWOX/excitationbackprop_cwox.py): Produces a base heatmap with MWP;
-   * [CWOX.rise_cwox](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/CWOX/rise_cwox.py): Produces a base heatmap with RISE;
-   * [CWOX.lime_cwox](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/CWOX/lime_cwox.py): Produces a base heatmap with LIME.
+   * [CWOX.grad_cam_cwox](https://github.com/vaynexie/CWOX/blob/main/CWOX/grad_cam_cwox.py): Produces a base heatmap with Grad-CAM;
+   * [CWOX.excitationbackprop_cwox](https://github.com/vaynexie/CWOX/blob/main/CWOX/excitationbackprop_cwox.py): Produces a base heatmap with MWP;
+   * [CWOX.rise_cwox](https://github.com/vaynexie/CWOX/blob/main/CWOX/rise_cwox.py): Produces a base heatmap with RISE;
+   * [CWOX.lime_cwox](https://github.com/vaynexie/CWOX/blob/main/CWOX/lime_cwox.py): Produces a base heatmap with LIME.
 
-* [CWOX.CWOX](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/CWOX/CWOX.py): Produces contrastive heatmaps with CWOX.
-* [CWOX.plt_wox.plot_cwox](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/CWOX/plt_wox.py): Visualize CWOX results.
+* [CWOX.CWOX](https://github.com/vaynexie/CWOX/blob/main/CWOX/CWOX.py): Produces contrastive heatmaps with CWOX.
+* [CWOX.plt_wox.plot_cwox](https://github.com/vaynexie/CWOX/blob/main/CWOX/plt_wox.py): Visualize CWOX results.
 
 
 -----------------------------------------------------------------------------------------------------------------------
 ## C. Examples
 
-**The following examples illustrate the use of CWOX to explain the results of ResNet50 on one image. The complete code can be found at [CWOX_Example.ipynb](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/CWOX_Example.ipynb), and more testing images can be found in the sub-directory [eval_image](https://github.com/HKUST-HUAWEI-XAI/CWOX/tree/main/eval_image).**
+**The following examples illustrate the use of CWOX to explain the results of ResNet50 on one image. The complete code can be found at [CWOX_Example.ipynb](https://github.com/vaynexie/CWOX/blob/main/CWOX_Example.ipynb), and more testing images can be found in the sub-directory [eval_image](https://github.com/vaynexie/CWOX/tree/main/eval_image).**
 
 ```python
 # Load Needed Package
@@ -198,17 +198,17 @@ plot_cwox(sal_dict,image,cluster_use_final)
 
 
 -----------------------------------------------------------------------------------------------------------------------
-## [D. Evaluation on Contrastive Explanation](https://github.com/HKUST-HUAWEI-XAI/CWOX/tree/main/Evaluation)
+## [D. Evaluation on Contrastive Explanation](https://github.com/vaynexie/CWOX/tree/main/Evaluation)
 
-The sub-directory [Evaluation](https://github.com/HKUST-HUAWEI-XAI/CWOX/tree/main/Evaluation) provides code to compute Evaluation Metrics for measuring Contrastive Faithfulness.
+The sub-directory [Evaluation](https://github.com/vaynexie/CWOX/tree/main/Evaluation) provides code to compute Evaluation Metrics for measuring Contrastive Faithfulness.
 
 
 -----------------------------------------------------------------------------------------------------------------------
-## [E. CWOX_Explainer (App)](https://github.com/HKUST-HUAWEI-XAI/CWOX/tree/main/CWOX_Explainer)
+## [E. CWOX_Explainer (App)](https://github.com/vaynexie/CWOX/tree/main/CWOX_Explainer)
 
 Application to perform the Contrastive Whole-out Explanation Process. Currently only ResNet50 and GoogleNet for ImageNet Image Classification are supported.
 
 
-See the [README page](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/CWOX_Explainer/readme.md) in the sub-directory CWOX_Explainer for the guidelines to use the Application.
+See the [README page](https://github.com/vaynexie/CWOX/blob/main/CWOX_Explainer/readme.md) in the sub-directory CWOX_Explainer for the guidelines to use the Application.
 
 

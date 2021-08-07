@@ -34,7 +34,7 @@ CWOX has a preprocessing step that partitions all class labels into confusion cl
  <b>Figure 2</b>
 </div>
 
-The codes for learning HLTMs are given in the sub-directory [HLTM](https://github.com/vaynexie/CWOX/tree/main/HLTM), along with the structures of the models obtained for [ResNet50](https://vaynexie.github.io/final_submit/resnet50) and [GoogleNet](https://vaynexie.github.io/final_submit/googlenet).
+The codes for learning HLTMs are given in the sub-directory [HLTM](https://github.com/vaynexie/CWOX/tree/main/HLTM), along with the structures of the models obtained for [ResNet50](https://vaynexie.github.io/CWOX/resnet50) and [GoogleNet](https://vaynexie.github.io/CWOX/googlenet).
 
 When interpreting the output of the classifier on a target image, CWOX obtains a subtree for the top classes by removing from the HLTM all the irrelevant nodes. The top classes are partitioned into **Label Confusion Clusters** by cutting the subtree at a certain level, the default being the lowest level. This is how the two clusters in Figure 1 are obtained from the tree in Figure 2. 
 

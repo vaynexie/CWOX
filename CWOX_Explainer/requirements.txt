@@ -1,3 +1,0 @@
-flask
-Flask-Session
-mindspore_CWOX

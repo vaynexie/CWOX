@@ -1,7 +1,0 @@
-{
-    "name": "xai_vis",
-    "version": "0.01",
-    "dependencies": {
-       "d3": "5.16.0"
-    }
-  }

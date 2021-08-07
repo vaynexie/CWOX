@@ -1,0 +1,350 @@
+{
+    "methods": [
+        {
+            "name": "GradCam",
+            "value": "grad_cam",
+            "parameters_cluster": [
+                {
+                    "name": "cluster_layer",
+                    "type": "select",
+                    "value": {
+                        "resnet50": [
+                            "layer3.4",
+                            "layer3.5",
+                            "layer4.0",
+                            "layer4.1",
+                            "layer4.2"
+                        ],
+                        "googlenet": [
+                            "inception4e",
+                            "inception5a.branch1",
+                            "inception5a.branch2",
+                            "inception5a.branch3",
+                            "inception5a.branch4",
+                            "inception5a",
+                            "inception5b.branch1",
+                            "inception5b.branch2",
+                            "inception5b.branch3",
+                            "inception5b.branch4",
+                            "inception5b"
+                        ]
+                    },
+                    "default": {
+                        "resnet50": "layer4.2",
+                        "googlenet": "inception5b"
+                    },
+                    "label": "Cluster Pivot Layer",
+                    "description": "From which layer to generate the heatmap of cluster stage."
+                }
+            ],
+            "parameters_class": [
+                {
+                    "name": "class_layer",
+                    "type": "select",
+                    "value": {
+                        "resnet50": [
+                            "layer3.4",
+                            "layer3.5",
+                            "layer4.0",
+                            "layer4.1",
+                            "layer4.2"
+                        ],
+                        "googlenet": [
+                            "inception4e",
+                            "inception5a.branch1",
+                            "inception5a.branch2",
+                            "inception5a.branch3",
+                            "inception5a.branch4",
+                            "inception5a",
+                            "inception5b.branch1",
+                            "inception5b.branch2",
+                            "inception5b.branch3",
+                            "inception5b.branch4",
+                            "inception5b"
+                        ]
+                    },
+                    "default": {
+                        "resnet50": "layer3.5",
+                        "googlenet": "inception5b.branch1"
+                    },
+                    "label": "Class Pivot Layer",
+                    "description": "From which layer to generate the heatmap of class stage."
+                }
+            ],
+            "parameters_nat": [
+                {
+                    "name": "layer",
+                    "type": "select",
+                    "value": {
+                        "resnet50": [
+                            "layer3.4",
+                            "layer3.5",
+                            "layer4.0",
+                            "layer4.1",
+                            "layer4.2"
+                        ],
+                        "googlenet": [
+                            "inception4e",
+                            "inception5a.branch1",
+                            "inception5a.branch2",
+                            "inception5a.branch3",
+                            "inception5a.branch4",
+                            "inception5a",
+                            "inception5b.branch1",
+                            "inception5b.branch2",
+                            "inception5b.branch3",
+                            "inception5b.branch4",
+                            "inception5b"
+                        ]
+                    },
+                    "default": {
+                        "resnet50": "layer4.2",
+                        "googlenet": "inception5b.branch1"
+                    },
+                    "label": "Pivot Layer",
+                    "description": "From which layer to generate the heatmap."
+                }
+            ]
+        },
+        {
+            "name": "MWP",
+            "value": "mwp",
+            "parameters_cluster": [
+                {
+                    "name": "cluster_layer",
+                    "type": "select",
+                    "value": {
+                        "resnet50": [
+                            "layer3.4",
+                            "layer3.5",
+                            "layer4.0",
+                            "layer4.1",
+                            "layer4.2"
+                        ],
+                        "googlenet": [
+                            "inception4e",
+                            "inception5a.branch1",
+                            "inception5a.branch2",
+                            "inception5a.branch3",
+                            "inception5a.branch4",
+                            "inception5a",
+                            "inception5b.branch1",
+                            "inception5b.branch2",
+                            "inception5b.branch3",
+                            "inception5b.branch4",
+                            "inception5b"
+                        ]
+                    },
+                    "default": {
+                        "resnet50": "layer4.2",
+                        "googlenet": "inception5b"
+                    },
+                    "label": "Cluster Pivot Layer",
+                    "description": "From which layer to generate the heatmap of cluster stage."
+                }
+            ],
+            "parameters_class": [
+                {
+                    "name": "class_layer",
+                    "type": "select",
+                    "value": {
+                        "resnet50": [
+                            "layer3.4",
+                            "layer3.5",
+                            "layer4.0",
+                            "layer4.1",
+                            "layer4.2"
+                        ],
+                        "googlenet": [
+                            "inception4e",
+                            "inception5a.branch1",
+                            "inception5a.branch2",
+                            "inception5a.branch3",
+                            "inception5a.branch4",
+                            "inception5a",
+                            "inception5b.branch1",
+                            "inception5b.branch2",
+                            "inception5b.branch3",
+                            "inception5b.branch4",
+                            "inception5b"
+                        ]
+                    },
+                    "default": {
+                        "resnet50": "layer4.0",
+                        "googlenet": "inception5b.branch1"
+                    },
+                    "label": "Class Pivot Layer",
+                    "description": "From which layer to generate the heatmap of class stage."
+                }
+            ],
+            "parameters_nat": [
+                {
+                    "name": "layer",
+                    "type": "select",
+                    "value": {
+                        "resnet50": [
+                            "layer3.4",
+                            "layer3.5",
+                            "layer4.0",
+                            "layer4.1",
+                            "layer4.2"
+                        ],
+                        "googlenet": [
+                            "inception4e",
+                            "inception5a.branch1",
+                            "inception5a.branch2",
+                            "inception5a.branch3",
+                            "inception5a.branch4",
+                            "inception5a",
+                            "inception5b.branch1",
+                            "inception5b.branch2",
+                            "inception5b.branch3",
+                            "inception5b.branch4",
+                            "inception5b"
+                        ]
+                    },
+                    "default": {
+                        "resnet50": "layer4.2",
+                        "googlenet": "inception5b.branch1"
+                    },
+                    "label": "Pivot Layer",
+                    "description": "From which layer to generate the heatmap."
+                }
+            ]
+        },
+        {
+            "name": "LIME",
+            "value": "lime",
+            "parameters_cluster": [
+                {
+                    "name": "Kernel_Size_cluster",
+                    "type": "number",
+                    "max": 20,
+                    "min": 1,
+                    "step": 1,
+                    "default": {
+                        "resnet50": 5,
+                        "googlenet": 5
+                    },
+                    "label": "Kernel Size",
+                    "description": "The Kernel Size parameter for lime explanation."
+                }
+            ],
+            "parameters_class": [
+            ],
+            "parameters_nat": [
+                {
+                    "name": "Kernel_Size",
+                    "type": "number",
+                    "max": 20,
+                    "min": 1,
+                    "step": 1,
+                    "default": {
+                        "resnet50": 5,
+                        "googlenet": 5
+                    },
+                    "label": "Kernel Size",
+                    "description": "The Kernel Size parameter for lime explanation."
+                }
+            ]
+        },
+        {
+            "name": "RISE",
+            "value": "rise",
+            "parameters_cluster": [
+                {
+                    "name": "Mask_Size_cluster",
+                    "type": "number",
+                    "max": 20,
+                    "min": 1,
+                    "step": 1,
+                    "default": {
+                        "resnet50": 12,
+                        "googlenet": 12
+                    },
+                    "label": "Cluster Mask Size",
+                    "description": "The mask size in rise explanation of cluster stage."
+                },
+                {
+                    "name": "Mask_Prob_cluster",
+                    "type": "number",
+                    "max": 1,
+                    "min": 0,
+                    "step": 0.0001,
+                    "default": {
+                        "resnet50": 0.3,
+                        "googlenet": 0.3
+                    },
+                    "label": "Cluster Mask Prob",
+                    "description": "The probability to keep a block in mask in rise explanation of cluster stage."
+                }
+            ],
+            "parameters_class": [
+                {
+                    "name": "Mask_Size_class",
+                    "type": "number",
+                    "max": 20,
+                    "min": 1,
+                    "step": 1,
+                    "default": {
+                        "resnet50": 10,
+                        "googlenet": 10
+                    },
+                    "label": "Class Mask Size",
+                    "description": "The mask size in rise explanation of class stage."
+                },
+                {
+                    "name": "Mask_Prob_class",
+                    "type": "number",
+                    "max": 1,
+                    "min": 0,
+                    "step": 0.0001,
+                    "default": {
+                        "resnet50": 0.15,
+                        "googlenet": 0.15
+                    },
+                    "label": "Class Mask Prob",
+                    "description": "The probability to keep a block in mask in rise explanation of class stage."
+                }
+            ],
+            "parameters_nat": [
+                {
+                    "name": "Mask_Size",
+                    "type": "number",
+                    "max": 20,
+                    "min": 1,
+                    "step": 1,
+                    "default": {
+                        "resnet50": 10,
+                        "googlenet": 10
+                    },
+                    "label": "Mask Size",
+                    "description": "The mask size in rise explanation."
+                },
+                {
+                    "name": "Mask_Prob",
+                    "type": "number",
+                    "max": 1,
+                    "min": 0,
+                    "step": 0.0001,
+                    "default": {
+                        "resnet50": 0.15,
+                        "googlenet": 0.15
+                    },
+                    "label": "Mask Prob",
+                    "description": "The probability to keep a block in mask in rise explanation."
+                }
+            ]
+        }
+    ],
+
+    "models": [
+        {
+            "name": "ResNet50",
+            "value": "resnet50"
+        },
+        {
+            "name": "GoogleNet",
+            "value": "googlenet"
+        }
+    ]}

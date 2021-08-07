@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CWOX Explainer</title>
+    <script src="scripts/lib/d3/d3.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="header">
+        <span>CWOX Explainer</span>
+    </div>
+    <div id="loader_container">
+        <div class="loader"></div>
+        <p>Calculating...</p>
+    </div>
+
+    <div class="panel_container">
+        <div class="side_col">
+            <div class="side_container">
+                <ul>
+                    <li>
+                        <label for="model_selector">Model:</label>
+                        <select id="model_selector" oninput="update_current_model()">
+                        </select>
+                    </li>
+                    <!--<li>
+                        <label for="target_image_file">image</label>
+                    </li>-->
+                    <li>
+                        <div class="drag_file_wrap">
+                            <div class="image_upload_hint">
+                                click or drag image <br> here to classify.
+                            </div>
+                            <img id="preview_image">
+                            <input type="file" id="target_image_file" accept="image/*" name="target_image_file"
+                                onchange="preview_load()">
+                        </div>
+                    </li>
+                    <li>
+                        <!--<input type="button" class="button" value="classify" style="margin-top: 6px;"
+                            onclick="submit()">-->
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <label id="label_filter_num_ind" for="label_filter_num">Number of top labels: </label>
+                    </li>
+                    <li>
+                        <input type="range" min="1" max="100" value="10" class="slider" id="label_filter_num">
+                        <!--
+                        <div style="padding: 0 0 0 16px;display: inline-block;">
+                            <input type="checkbox" id="label_filter_num_ext" onclick="update_label_filter_num()">
+                            <label for="label_filter_num_ext">extend</label>
+                        </div>
+                        -->
+                    </li>
+                    <li>
+                        <label id="label_filter_per_ind" for="label_filter_per">Percentage of top labels: </label>
+                    </li>
+                    <li>
+                        <input type="range" min="0" max="1" value="0.95" step="0.0001" class="slider"
+                            id="label_filter_per">
+                    </li>
+                    <li>
+                        <label for="label_selection">Top labels</label>
+                    </li>
+                    <li>
+                        <select name="label_selection" id="label_selection" multiple="multiple"
+                            onchange="reload_cluster()"></select>
+                    </li>
+                    <li>
+                        <label for="saliency_map_selector">Base explainer</label>
+                        <select id="saliency_map_selector" onchange="
+                            $('#explain_cwox').attr('disabled', $('#label_selection').val().length == 0);
+                            $('#explain_swox').attr('disabled', $('#label_selection').val().length == 0);
+                            ">
+                        </select>
+                    </li>
+                    <li>
+                        <input type="button" id="explain_cwox" class="button" value="explain" style="display: block;"
+                            disabled>
+                        <input type="button" id="explain_swox" class="button" value="explain" style="display: none;"
+                            disabled>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="display_panel" id="canvas_1">
+            <div id="page_menu">
+                <div id="cluster_ranger_tab">Cluster</div>
+                <div id="cwox_result_tab">CWOX Result</div>
+                <div id="swox_result_tab">SWOX Result</div>
+            </div>
+            <div id="cluster_ranger_container">
+                <svg id="dendrogram_view" style="display: block"></svg>
+                <svg id="cluster_ranger" style="display: none;"></svg>
+                <!--<a id="cluster_ranger_switch" href="javascript:switch_cluster_ranger()">more flexible</a>-->
+            </div>
+
+            <div id="cwox_result_container">
+                <div class="explain_type_indicator">CWOX</div>
+                <div id="control_panel_1"></div>
+                <div style="float: right; z-index: 10;">
+                    <label style="opacity: 0.7;">show class images</label>
+                    <input type="checkbox" class="trigger_hint_image">
+                    <input type="button" class="zoom_in" value=" + ">
+                    <input type="button" class="zoom_out" value=" - ">
+                </div>
+                <div id="cwox_result_box"></div>
+            </div>
+            <div id="swox_result_container">
+                <div class="explain_type_indicator">SWOX</div>
+                <div id="control_panel_2"></div>
+                <div style="float: right; z-index: 10;">
+                    <label style="opacity: 0.7;">show class images</label>
+                    <input type="checkbox" class="trigger_hint_image">
+                    <input type="button" class="zoom_in" value=" + ">
+                    <input type="button" class="zoom_out" value=" - ">
+                </div>
+                <div id="swox_result_box"></div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $(window).resize(function () {
+            if ($("#dendrogram_view g").length) {
+                update_dendrogram();
+            }
+            if ($("#cwox_result_box div")) {
+                rescale_cwox_result();
+            }
+            if ($("#swox_result_box div")) {
+                rescale_swox_result();
+            }
+        });
+
+        d3.selectAll("input.zoom_in").on("click", function () {
+            base_scale *= Math.exp(150 / 2000);
+            base_scale = Math.min(4, Math.max(0.25, base_scale));
+            if ($("#cwox_result_box div")) {
+                rescale_cwox_result();
+            }
+            if ($("#swox_result_box div")) {
+                rescale_swox_result();
+            }
+        });
+
+        d3.selectAll("input.zoom_out").on("click", function () {
+            base_scale *= Math.exp(-150 / 2000);
+            base_scale = Math.min(4, Math.max(0.25, base_scale));
+            if ($("#cwox_result_box div")) {
+                rescale_cwox_result();
+            }
+            if ($("#swox_result_box div")) {
+                rescale_swox_result();
+            }
+        });
+
+        d3.selectAll("input.trigger_hint_image").on("change", function () {
+            var val = $(this).is(':checked');
+            $("input.trigger_hint_image").prop('checked', val);
+            $(".saliency_class_tip").css("display", val ? "inline-block" : "none")
+            if ($("#cwox_result_box div")) {
+                rescale_cwox_result();
+            }
+            if ($("#swox_result_box div")) {
+                rescale_swox_result();
+            }
+        })
+
+        switch_to("cluster_ranger_container");
+
+        $("#page_menu > div").click(function () {
+            var target = $(this).attr("id").replace("_tab", "_container");
+            if (clusters) {
+                if (
+                    $("#cwox_result_box div").length == 0
+                    && target == "cwox_result_container"
+                    && !$("#explain_cwox").is(":disabled")) {
+                    explain_cwox();
+                }
+                if ($("#swox_result_box div").length == 0
+                    && target == "swox_result_container"
+                    && !$("#explain_swox").is(":disabled")) {
+                    explain_swox();
+                }
+                switch_to(target);
+            }
+        })
+
+        function switch_to(id) {
+            var list = [
+                "cluster_ranger_container",
+                "cwox_result_container",
+                "swox_result_container"
+            ];
+            if (list.includes(id)) {
+                for (var ele of list) {
+                    $("#" + ele).css("display", id == ele ? "block" : "none");
+                    $("#" + ele.replace("_container", "_tab")).css("color", id == ele ? "#555" : "#999")
+                }
+                $("#explain_swox").css("display", id == "swox_result_container" ? "block" : "none");
+                $("#explain_cwox").css("display", id == "swox_result_container" ? "none" : "block");
+            }
+        }
+
+        function set_loading(status) {
+            var target = d3.select("#loader_container");
+            if (status) {
+                target.style("opacity", 0);
+                target.style("display", "block");
+                target.transition().duration(200)
+                    .style("opacity", 1)
+                    .style("buttom", "60%");
+            } else {
+                target.style("opacity", 1);
+                target.transition().duration(200)
+                    .style("opacity", 0)
+                    .style("buttom", "50%");
+                target.style("display", "none");
+            }
+        }
+
+        support_info = null;
+        d3.json("support_info.json").then(
+            function (data) {
+                support_info = data;
+                d3.select("#saliency_map_selector")
+                    .selectAll("option")
+                    .data(support_info.methods)
+                    .join("option")
+                    .attr("value", d => d.value)
+                    .text(d => d.name);
+                $("#saliency_map_selector").val(support_info.methods[0].value);
+
+                d3.select("#model_selector")
+                    .selectAll("option")
+                    .data(support_info.models)
+                    .join("option")
+                    .attr("value", d => d.value)
+                    .text(d => d.name);
+                $("#model_selector").val(support_info.models[0].value);
+                update_current_model();
+            }
+        );
+
+        function update_current_model() {
+            current_model = $("#model_selector").val();
+            console.log("current_model: " + current_model);
+            $("#explain_cwox").attr("disabled", true);
+            $("#explain_swox").attr("disabled", true);
+            if ($("#target_image_file").val()) {
+                submit();
+            }
+        }
+
+        hierarchies = null;
+        current_model = null;
+        d3.json("hltas.json").then(
+            function (d) {
+                hierarchies = {};
+                for (var [key, val] of Object.entries(d)) {
+
+                    var hierarchy = d3.hierarchy({ id: "root", children: val.hierarchy });
+                    for (var node of hierarchy.descendants()) {
+                        node.height += 1;
+                        if (node.data.id != "root") {
+                            var node_probs = node.data.text.filter((d, i) => i % 2 == 1).map(x => parseFloat(x))
+                            var node_prototype_maxval = d3.max(node_probs);
+                            var node_prototype_indx = node_probs.findIndex(x => x == node_prototype_maxval);
+                            node.prototype = node.data.text.filter((d, i) => i % 2 == 0)[node_prototype_indx];
+                        } else {
+                            node.prototype = undefined;
+                        }
+                    }
+                    for (var leave of hierarchy.leaves()) {
+                        leave.children = [];
+                        real_leaves = leave.data.text.filter((d, i) => i % 2 == 0);
+                        for (var node of real_leaves) {
+                            node = d3.hierarchy({ id: node });
+                            node.parent = leave;
+                            node.depth = leave.depth + 1
+                            leave.children.push(node);
+                        }
+                    }
+                    hierarchy.cut_depth = val.cut_depth;
+                    hierarchies[key] = hierarchy;
+                }
+            }
+        );
+
+        function switch_cluster_ranger() {
+            if ($("#dendrogram_view").css("display") != "none") {
+                $("#dendrogram_view").css("display", "none");
+                $("#cluster_ranger").css("display", "block");
+                $("#cluster_ranger_switch").text("less flexible");
+            } else {
+                $("#dendrogram_view").css("display", "block");
+                $("#cluster_ranger").css("display", "none");
+                $("#cluster_ranger_switch").text("more flexible");
+            }
+        }
+
+        function saliency_recover(saliency) {
+            var bytes = Uint8Array.from(atob(saliency.bytes), c => c.charCodeAt(0));
+            var array = new Float32Array(bytes.buffer);
+            var array2d = [];
+            for (var i = 0; i < saliency.shape[0]; i++) {
+                for (var j = 0; j < saliency.shape[1]; j++) {
+                    array2d.push(
+                        {
+                            x: j,
+                            y: i,
+                            val: array[i * saliency.shape[1] + j]
+                        }
+                    )
+                }
+            }
+            return array2d;
+        }
+
+        function get_subtree(labels) {
+            labels = labels.map(d => "c" + ("000" + d).slice(-3));
+            var leaves = hierarchies[current_model].leaves().filter(d => labels.includes(d.data.id));
+            var paths = leaves.map(d => d.ancestors().map(d => ({ id: d.data.id, prototype: d.prototype })).reverse());
+            var root = { id: "root", children: [] }
+            var nodes = []
+            for (var path of paths) {
+                for (var node of path) {
+                    if (!nodes.includes(node)) {
+                        nodes.push(node);
+                    }
+                }
+            }
+
+            nodes = nodes.map(d => ({ id: d.id, children: [], prototype: d.prototype }));
+
+            for (var path of paths) {
+                var pointer = nodes.find(d => d.id == path[0].id)
+                for (var node of path.splice(1)) {
+                    node = nodes.find(d => d.id == node.id);
+                    if (!pointer.children.includes(node)) {
+                        pointer.children.push(node);
+                    }
+                    pointer = node;
+                }
+            }
+            return d3.hierarchy(nodes.find(d => d.id == "root"))
+        }
+
+        function wrap(text, t) {
+            var lines = [];
+            var words = text.split(/\s/);
+            var r = words[0];
+            for (var v of words.slice(1)) {
+                if (r.length + v.length + 1 <= t) {
+                    r += " " + v;
+                } else {
+                    lines.push(r);
+                    r = v;
+                }
+            }
+            lines.push(r);
+            return lines;
+        }
+
+        cut_tree_at_layer = (tree, layer = 3) =>
+            tree.descendants().filter(d => d.depth == layer).map(d => d.leaves().map(d => d.data.id));
+
+        var clusters = [[]];
+
+        function update_label_filter_num() {
+            var selection_box = d3.select("#label_selection");
+            var data = selection_box.selectAll("option").data();
+            $("#label_filter_num").attr("max", $("#label_filter_num_ext").is(":checked") ? "" + data.length : 10);
+            //$("#label_filter_num_ind").text(`number of top classes: ${$("#label_filter_num").val()}`);
+        }
+
+        function submit() {
+            var image = $("#target_image_file")[0].files[0];
+            current_model = $("#model_selector").val();
+            if (image && hierarchies && support_info) {
+                var fd = new FormData()
+                fd.append("image", image)
+                fd.append("model", current_model)
+                set_loading(true);
+                $.ajax({
+                    url: '/upload',
+                    type: 'POST',
+                    data: fd,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        var data = JSON.parse(response);
+                        var c_perp = data.c_perp;
+                        //model_modules = data.modules;
+                        var data = data.preds;
+                        $("#label_filter_num").attr("max", $("#label_filter_num_ext").is(":checked") ? "" + data.length : 10);
+                        var selection_box = d3.select("#label_selection");
+                        selection_box.selectAll("option").data(data).join("option").on("mousedown", function () {
+                            this.selected = !this.selected;
+                            var content = $(this).html();
+                            content = content.replace("&gt;", "");
+                            $(this).html(content + (this.selected ? ">" : ""));
+                            d3.event.preventDefault();
+                            reload_cluster();
+                        });
+                        $("#label_filter_num").val(10);
+                        $("#label_filter_per").val(0.95);
+                        update_selection_box("init", c_perp);
+                        $("#explain_cwox").val("explain");
+                        $("#explain_swox").val("explain");
+
+                        $("#label_filter_num").attr("oninput", "update_selection_box('num')");
+                        $("#label_filter_per").attr("oninput", "update_selection_box('per')");
+
+                        reload_cluster();
+                        d3.select("#cwox_result_box").selectAll("*").remove();
+                        d3.select("#control_panel_1").selectAll("*").remove();
+
+                        d3.select("#swox_result_box").selectAll("*").remove();
+                        d3.select("#control_panel_2").selectAll("*").remove();
+
+                        switch_to("cluster_ranger_container");
+                        set_loading(false);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        set_loading(false);
+                        alert("some faults happend on server!")
+                    }
+                })
+            }
+            else if (image) {
+                alert("Loading necessary resources!")
+            } else {
+                alert("no image uploaded!");
+            }
+        }
+
+        function reorder_clusters(clusters) {
+            var selected = $('#label_selection').val().map(d => "c" + ("000" + d).slice(-3));
+            var find_in = x => selected.findIndex(d => d == x);
+            clusters = clusters.map(d => d.sort((a, b) => find_in(a) - find_in(b)));
+            clusters = clusters.sort((a, b) => find_in(a[0]) - find_in(b[0]));
+            return clusters;
+        }
+
+        var indx2label = null;
+
+        function reload_cluster() {
+            var selected = $('#label_selection').val();
+            var tree = get_subtree(selected);
+            var cut_depth = hierarchies[current_model].cut_depth;
+            clusters = cut_tree_at_layer(tree, cut_depth);
+            clusters = reorder_clusters(clusters);
+
+            if (indx2label == null) {
+                d3.json("imagenet_class_index.json").then(function (data) {
+                    indx2label = data;
+                    create_class_ranger();
+                    update_dendrogram();
+
+                });
+            } else {
+                create_class_ranger();
+                update_dendrogram();
+            }
+        }
+
+        var result_scale = 1;
+        var base_scale = 1;
+
+        var clusters = [[]];
+
+        var result_method_cwox = null;
+        var result_model_cwox = null;
+        //var result_class_layer_cwox = null;
+        //var result_cluster_layer_cwox = null;
+
+        $("#explain_cwox").attr("onclick", "explain_cwox()");
+        $("#explain_swox").attr("onclick", "explain_swox()");
+        function explain_cwox() {
+            var selected = $('#label_selection').val();
+            var tree = get_subtree(selected);
+            //clusters = cut_tree_at_layer(tree, 5);
+            //console.log(clusters);
+            clusters = reorder_clusters(clusters);
+            var paras = {
+                'clusters': JSON.stringify(clusters),
+                'saliency_map': $("#saliency_map_selector").val(),
+                'type': "cwox",
+                "saliency_parameters": {}
+            }
+            var this_method = support_info.methods.find(d => d.value == paras.saliency_map);
+            var this_model = support_info.models.find(d => d.value == $("#model_selector").val());
+            for (var para of this_method.parameters_cluster) {
+                paras.saliency_parameters[para.name] = $(`#saliency_control_para_${para.name}`).val();
+
+                var cond = paras[para.name] == undefined ||
+                    result_method_cwox != this_method.value ||
+                    result_model_cwox != this_model.value;
+
+                paras[para.name] = cond ?
+                    para.default[this_model.value] : paras.saliency_parameters[para.name];
+            }
+
+            for (var para of this_method.parameters_class) {
+                paras.saliency_parameters[para.name] = $(`#saliency_control_para_${para.name}`).val();
+
+                var cond = paras[para.name] == undefined ||
+                    result_method_cwox != this_method.value ||
+                    result_model_cwox != this_model.value;
+
+                paras[para.name] = cond ?
+                    para.default[this_model.value] : paras.saliency_parameters[para.name];
+            }
+            paras.saliency_parameters = JSON.stringify(paras.saliency_parameters);
+            set_loading(true);
+            $.post('/explain', paras,
+                function (response) {
+                    d3.select("#cwox_result_box").selectAll("*").remove();
+                    d3.select("#control_panel_1").selectAll("*").remove();
+
+                    response = JSON.parse(response);
+                    var data = response.result;
+                    var meta = response.meta;
+                    result_method_cwox = this_method.value;
+                    result_model_cwox = this_model.value;
+                    //result_class_layer_cwox = paras.class_layer ? paras.class_layer : null;
+                    //result_cluster_layer_cwox = paras.cluster_layer ? paras.cluster_layer : null;
+
+                    $("#explain_cwox").attr("disabled", true);
+                    $("#explain_cwox").val("update explanation");
+                    switch_to("cwox_result_container");
+
+                    var max_col = d3.max(data, d => d.childrens.length + 1);
+
+
+                    for (var cluster of data) {
+                        /*
+                        for (var layer in cluster.array) {
+                            cluster.saliencies[layer] = saliency_recover(cluster.saliencies[layer]);
+                        }
+                        */
+                        cluster.saliency = saliency_recover(cluster.array)
+                        for (var pos of cluster.childrens) {
+                            /*
+                            for (var layer in pos.saliencies) {
+                                pos.saliencies[layer] = saliency_recover(pos.saliencies[layer]);
+                            }
+                            */
+                            pos.saliency = saliency_recover(pos.array)
+                            pos.cluster = cluster;
+                            pos.cluster_id = cluster.id;
+                        }
+                    }
+                    /*
+                    d3.select("#cwox_result_box").on("wheel", function () {
+                        d3.event.preventDefault();
+                        base_scale *= Math.exp(d3.event.wheelDelta / 2000);
+                        base_scale = Math.min(4, Math.max(0.25, base_scale));
+                        if ($("#cwox_result_box div")) {
+                            rescale_cwox_result();
+                        }
+                        if ($("#swox_result_box div")) {
+                            rescale_swox_result();
+                        }
+                    })*/
+                    var row_container_wrap = d3.select("#cwox_result_box")
+                        .selectAll("div")
+                        .data(data)
+                        .join("div").attr('id', d => d.id)
+                        .attr("class", "row_container_wrap");
+
+                    var row_control = row_container_wrap.filter(d => d.childrens.length != 1)
+                        .append("div")
+                        .style("max-width", "400px")
+                        .style("display", "flex").style("align-items", "center");
+
+                    row_control.append("div")
+                        .style("display", "inline-block")
+                        .style("min-width", "150px")
+                        .append("label")
+                        .attr("for", d => "thres_slider_" + d.id)
+                        .html("Support threshold: ");
+
+                    row_control.append("input").attr("id", d => "thres_slider_" + d.id)
+                        .attr("type", "range").on("input", update_saliencies);
+
+                    var row_container = row_container_wrap.append("div").attr("class", "row_container")
+                    var clusters = row_container.append('div').attr("class", "col_container").append('div');
+                    //var extract_one = d => d.saliencies[Object.keys(d.saliencies)[0]];
+
+                    clusters.style("background", "#eee").style("padding", "0 27px 4px 15px")
+
+                    clusters.append('div').append('span')
+                        .text(d => d.id +
+                            (d.childrens.length != 1 ? "" : "  " + indx2label[d.childrens[0].id][1])
+                        );
+                    clusters.append('canvas').attr("class", "saliency_box")
+                        .attr("saliency_id", d => d.id)
+                        .style("background", 'url("' + d3.select("#preview_image").attr("src") + '")')
+                        //.style("object-fit", "fill")
+                        .attr("width", d => (d3.max(d.saliency, d => d.x) + 1) + "px")
+                        .attr("height", d => (d3.max(d.saliency, d => d.y) + 1) + "px")
+                        .style("background-size", "100% 100%");
+
+
+                    clusters.filter(d => d.childrens.length == 1)
+                        .append("img").attr("src", d => `/site/class_image/${d.childrens[0].id}.png`)
+                        .attr("class", "saliency_class_tip")
+                        .attr("width", d => (d3.max(d.saliency, d => d.x) + 1) + "px")
+                        .attr("height", d => (d3.max(d.saliency, d => d.y) + 1) + "px")
+                        .style("display", "none");;
+
+                    var col_container = row_container.append('div')
+                        .attr("class", "col_container").selectAll("div")
+                        .data(d => d.childrens.length != 1 ? d.childrens : [])
+                        .join("div");
+
+                    col_container.append("div").append("span").text(d => isNaN(d.id) ? d.id : indx2label[d.id][1]);
+
+                    col_container.append('canvas').attr("class", "saliency_box")
+                        .style("background", 'url("' + d3.select("#preview_image").attr("src") + '")')
+                        //.style("opacity", "0.5")
+                        .attr("width", d => (d3.max(d.saliency, d => d.x) + 1) + "px")
+                        .attr("height", d => (d3.max(d.saliency, d => d.y) + 1) + "px")
+                        .style("background-size", "100% 100%");
+
+                    col_container.append("img").attr("src", d => `/site/class_image/${d.id}.png`)
+                        .attr("class", "saliency_class_tip")
+                        .attr("width", d => (d3.max(d.saliency, d => d.x) + 1) + "px")
+                        .attr("height", d => (d3.max(d.saliency, d => d.y) + 1) + "px")
+                        .style("display", "none");
+
+                    //console.log(model_modules, layer_list);
+                    d3.select("#control_panel_1")
+                        .append("span")
+                        .text("Parameters")
+                        .style("color", "#5d82b3")
+                        .style("margin-left", "-90px")
+                        .style("font-size", "16px");
+
+                    var cluster_control = d3.select("#control_panel_1").append("div").attr("id", "cluster_control_cwox");
+                    var para_cluster = this_method.parameters_cluster;
+                    var paras = JSON.parse(meta.para_json);
+                    for (var para of para_cluster) {
+                        var div = cluster_control.append("div")
+                            .style("display", "inline-block")
+                            .style("margin-right", "40px");
+
+                        var id = `saliency_control_para_${para.name}`;
+                        div.append("label")
+                            .attr("for", id)
+                            .attr("title", para.description + ` (default: ${para.default[meta.model]})`)
+                            .text(para.label)
+                            .style("padding-right", "10px")
+                            .style("font-size", "12px");
+
+                        if (para.type == "number") {
+                            var input = div
+                                .append("input")
+                                .attr("id", id)
+                                .attr("type", para.type)
+                                .attr("title", para.description + ` (default: ${para.default[meta.model]})`);
+                            input.attr("min", para.min)
+                                .attr("max", para.max)
+                                .attr("step", para.step)
+                                .attr("value", paras[para.name])
+                                .attr("title", para.description);
+                        } else if (para.type == "select") {
+                            var input = div.append("select").attr("id", id);
+                            input.attr("title", para.description + ` (default: ${para.default[meta.model]})`);
+                            input.selectAll("option")
+                                .data(para.value[meta.model])
+                                .join("option")
+                                .attr("value", d => d)
+                                .text(d => d);
+
+                            $("#" + id).val(paras[para.name]);
+                        }
+                        input.on("input", function () {
+                            var flag = $("#explain_cwox").is("disabled");
+                            console.log(flag);
+                            for (var para of this_method.parameters_cluster) {
+                                flag = flag
+                                    && $(`#saliency_control_para_${para.name}`).val() == paras[para.name];
+                                if (!flag) {
+                                    break;
+                                }
+                            }
+                            for (var para of this_method.parameters_class) {
+                                flag = flag
+                                    && $(`#saliency_control_para_${para.name}`).val() == paras[para.name];
+                                if (!flag) {
+                                    break;
+                                }
+                            }
+                            $("#explain_cwox").attr("disabled", flag);
+                        })
+                    }
+
+                    var class_control = d3.select("#control_panel_1").append("div").attr("id", "class_control_cwox");
+                    var para_class = this_method.parameters_class;
+                    var paras = JSON.parse(meta.para_json);
+                    for (var para of para_class) {
+                        var div = class_control.append("div")
+                            .style("display", "inline-block")
+                            .style("margin-right", "40px");
+
+                        var id = `saliency_control_para_${para.name}`;
+                        div.append("label")
+                            .attr("for", id)
+                            .attr("title", para.description + ` (default: ${para.default[meta.model]})`)
+                            .text(para.label)
+                            .style("padding-right", "10px")
+                            .style("font-size", "12px");
+
+                        if (para.type == "number") {
+                            var input = div
+                                .append("input")
+                                .attr("id", id)
+                                .attr("type", para.type)
+                                .attr("title", para.description + ` (default: ${para.default[meta.model]})`);
+                            input.attr("min", para.min)
+                                .attr("max", para.max)
+                                .attr("step", para.step)
+                                .attr("value", paras[para.name])
+                                .attr("title", para.description);
+                        } else if (para.type == "select") {
+                            var input = div.append("select").attr("id", id);
+                            input.attr("title", para.description + ` (default: ${para.default[meta.model]})`);
+                            input.selectAll("option")
+                                .data(para.value[meta.model])
+                                .join("option")
+                                .attr("value", d => d)
+                                .text(d => d);
+                            $("#" + id).val(paras[para.name]);
+                        }
+                        input.on("input", function () {
+                            var flag = $("#explain_cwox").is(":disabled");
+                            console.log(flag);
+                            for (var para of this_method.parameters_cluster) {
+                                flag = flag
+                                    && $(`#saliency_control_para_${para.name}`).val() == paras[para.name];
+                                if (!flag) {
+                                    break;
+                                }
+                            }
+                            for (var para of this_method.parameters_class) {
+                                flag = flag
+                                    && $(`#saliency_control_para_${para.name}`).val() == paras[para.name];
+                                if (!flag) {
+                                    break;
+                                }
+                            }
+                            $("#explain_cwox").attr("disabled", flag);
+                        })
+                    }
+
+                    function update_cluster_saliency() {
+                        clusters.selectAll('canvas').each(function (d) {
+                            var slider = $("#thres_slider_" + d.id);
+                            var d = d.saliency;
+                            var ctx = d3.select(this).node().getContext('2d');
+                            //var layer = d3.select("#cluster_layer").property("value");
+                            var range = d3.extent(d, d => d.val);
+                            slider.attr("max", range[1] + (range[1] - range[0]) / 1000);
+                            slider.attr("min", range[0] - (range[1] - range[0]) / 1000);
+                            //console.log(d)
+                            //slider.attr("value", d.map(d => d.val).sort()[Math.ceil(0.7 * d.length)]);
+                            slider.attr("step", (range[1] - range[0]) / 1000);
+                            slider.val("" + 0 * d.map(d => d.val).sort()[Math.ceil(0.6 * d.length)]);
+                            var color = d3.scaleSequential(d3.interpolateTurbo).domain(range);
+                            var jet = interpolateJet();
+                            range[1] = range[1] == 0 ? 1 : range[1];
+                            range[0] = Math.max(0, range[0])
+                            color = x => jet((x - range[0]) / (range[1] - range[0]))
+
+                            var img_data = ctx.createImageData(d3.max(d, d => d.x) + 1, d3.max(d, d => d.y) + 1);
+                            for (var [i, v] of d.entries()) {
+                                var c = d3.color(color(v.val));
+                                img_data.data[4 * i] = c.r;
+                                img_data.data[4 * i + 1] = c.g;
+                                img_data.data[4 * i + 2] = c.b;
+                                img_data.data[4 * i + 3] = 170;
+                            }
+                            ctx.putImageData(img_data, 0, 0);
+                            ctx.globalAlpha = 0.5;
+                        }
+                        )
+                        update_saliencies();
+                    }
+
+                    update_cluster_saliency();
+
+                    //d3.select("#cluster_layer").on("change", update_cluster_saliency);
+
+                    function update_saliency(d) {
+                        var flag = $(this).attr("data-flag");
+                        var cluster_saliency = d.cluster ? d.cluster.saliency : d.saliency;
+                        var cluster_id = d.cluster ? d.cluster.id : d.id;
+                        var mask_layer = cluster_saliency.map(d => d.val);
+                        var thres = $("#thres_slider_" + cluster_id).val();
+                        thres = thres ? thres : 0;
+                        var cur_flag = "cluster_layer" + "_@" + thres;
+                        if (flag != cur_flag) {
+                            var d = d.saliency;
+                            var ctx = d3.select(this).node().getContext('2d');
+                            //var layer = d3.select("#class_layer_cwox").property("value");
+                            //console.log(d3.extent(d, d=>d.val));
+                            var array = d.map(d => d.val).map((d, i) => d * (mask_layer[i] > thres ? 1 : 0));
+                            var range = d3.extent(array);
+                            //range[0] = Math.min(0, range[0]);
+                            range[0] = 0;
+                            var color = d3.scaleSequential(d3.interpolateTurbo).domain(range);
+                            var jet = interpolateJet();
+                            range[1] = range[1] == 0 ? 1 : range[1];
+                            range[0] = Math.max(0, range[0])
+                            color = x => jet((x - range[0]) / (range[1] - range[0]))
+
+                            var img_data = ctx.createImageData(d3.max(d, d => d.x) + 1, d3.max(d, d => d.y) + 1);
+
+                            for (var [i, v] of array.entries()) {
+                                var c = d3.color(color(v));
+                                img_data.data[4 * i] = c.r;
+                                img_data.data[4 * i + 1] = c.g;
+                                img_data.data[4 * i + 2] = c.b;
+                                img_data.data[4 * i + 3] = 170;
+                            }
+                            ctx.putImageData(img_data, 0, 0);
+                            ctx.globalAlpha = 0.5;
+                            $(this).attr("data-flag", cur_flag);
+                        }
+                    }
+
+
+                    function update_saliencies() {
+                        col_container.selectAll('canvas').each(
+                            update_saliency
+                        )
+                        clusters.selectAll('canvas').each(
+                            update_saliency
+                        )
+                    }
+
+                    rescale_cwox_result();
+                    set_loading(false);
+                }
+            ).fail(function (xhr, status, error) {
+                // error handling
+                set_loading(false);
+                alert("Some faults happen on server!")
+            });
+        }
+
+        function rescale_cwox_result() {
+            d3.selectAll("div.row_container").style("zoom", "1%");
+            var height = $("#canvas_1").height();
+            var width = $("#canvas_1").width();
+
+            d3.selectAll("div.row_container").style("zoom", "1");
+            var num_row = $("div.row_container").length;
+            var row_height = $("div.row_container").height();
+            var height_all_rows = num_row * row_height;
+            var max_col = d3.max($(".col_container").map(function () {
+                return $(this).children().length
+            }).get()) + 1
+
+            var height_others = $("#canvas_1").height() - num_row * row_height;
+            var height_all_rows_fit = Math.max(num_row * 75, height - height_others);
+
+            var scale_x = height_all_rows_fit / height_all_rows;
+            var scale_y = Math.max(width, max_col * 75) / $("#canvas_1").width();
+
+            result_scale = Math.min(scale_x, scale_y);
+            d3.selectAll("div.row_container").style("zoom", "" + base_scale * result_scale);
+        }
+
+        var result_model_swox = null;
+        var result_method_swox = null
+        //var result_class_layer_swox = null;
+        function explain_swox() {
+            var selected = $('#label_selection').val();
+            var paras = {
+                'clusters': JSON.stringify([selected]),
+                'saliency_map': $("#saliency_map_selector").val(),
+                'type': "swox",
+                "saliency_parameters": {}
+            }
+            var this_method = support_info.methods.find(d => d.value == paras.saliency_map);
+            var this_model = support_info.models.find(d => d.value == $("#model_selector").val());
+            for (var para of this_method.parameters_nat) {
+                paras.saliency_parameters[para.name] = $(`#saliency_control_para_${para.name}`).val();
+
+                var cond = paras[para.name] == undefined ||
+                    result_method_swox != this_method.value ||
+                    result_model_swox != this_model.value;
+
+                paras.saliency_parameters[para.name] = cond ?
+                    para.default[this_model.value] : paras.saliency_parameters[para.name];
+            }
+            paras.saliency_parameters = JSON.stringify(paras.saliency_parameters);
+
+            set_loading(true);
+            $.post('/explain', paras,
+                function (response) {
+                    d3.select("#swox_result_box").selectAll("*").remove();
+                    d3.select("#control_panel_2").selectAll("*").remove();
+
+                    response = JSON.parse(response);
+                    var data = response.result;
+                    var meta = response.meta;
+                    result_method_swox = this_method.value;
+                    result_model_swox = this_model.value;
+                    //result_class_layer_swox = paras.class_layer ? paras.class_layer : null;
+
+                    $("#explain_swox").attr("disabled", true);
+                    $("#explain_swox").val("update explanation");
+                    switch_to("swox_result_container");
+
+                    d3.select("#control_panel_2")
+                        .append("span")
+                        .text("Parameters")
+                        .style("color", "#5d82b3")
+                        .style("margin-left", "-90px")
+                        .style("font-size", "16px");
+
+                    var swox_control = d3.select("#control_panel_2").append("div").attr("id", "control_swox");
+                    var para_nat = this_method.parameters_nat;
+                    var paras = JSON.parse(meta.para_json);
+                    for (var para of para_nat) {
+                        var div = swox_control.append("div")
+                            .style("display", "inline-block")
+                            .style("margin-right", "40px");
+
+                        var id = `saliency_control_para_${para.name}`;
+                        div.append("label")
+                            .attr("for", id)
+                            .attr("title", para.description + ` (default: ${para.default[meta.model]})`)
+                            .text(para.label)
+                            .style("padding-right", "10px")
+                            .style("font-size", "12px");
+
+                        if (para.type == "number") {
+                            var input = div
+                                .append("input")
+                                .attr("id", id)
+                                .attr("type", para.type)
+                                .attr("title", para.description + ` (default: ${para.default[meta.model]})`);
+                            input.attr("min", para.min)
+                                .attr("max", para.max)
+                                .attr("step", para.step)
+                                .attr("value", paras[para.name])
+                                .attr("title", para.description);
+                        } else if (para.type == "select") {
+                            var input = div.append("select").attr("id", id);
+                            input.attr("title", para.description + ` (default: ${para.default[meta.model]})`);
+                            input.selectAll("option")
+                                .data(para.value[meta.model])
+                                .join("option")
+                                .attr("value", d => d)
+                                .text(d => d);
+                            $("#" + id).val(paras[para.name]);
+                        }
+                        input.on("input", function () {
+                            var flag = $("#explain_swox").is(":disabled");
+                            console.log(flag);
+                            for (var para of this_method.parameters_nat) {
+                                flag = flag
+                                    && $(`#saliency_control_para_${para.name}`).val() == paras[para.name];
+                                if (!flag) {
+                                    break;
+                                }
+                            }
+                            $("#explain_swox").attr("disabled", flag);
+                        })
+                    }
+
+                    d3.select("#swox_result_box").style("max-width", "1200px").style("white-space", "normal");
+                    for (var label of data) {
+                        label.saliency = saliency_recover(label.array)
+                    }
+                    d3.select("#swox_result_box").selectAll("div")
+                        .data(data)
+                        .join("div")
+                        .attr("class", "swox_saliency_result")
+                        .style("margin", "20px 20px 20px 20px").style("display", "inline-block").each(
+                            function (d) {
+                                d3.select(this).append("div").append("span").text(d => indx2label[d.id.replace("label_", "")][1]);
+                                var canvas = d3.select(this).append("canvas").attr("class", "saliency_box")
+                                    .style("background", 'url("' + d3.select("#preview_image").attr("src") + '")')
+                                    //.style("object-fit", "fill")
+                                    .attr("width", d => (d3.max(d.saliency, d => d.x) + 1) + "px")
+                                    .attr("height", d => (d3.max(d.saliency, d => d.y) + 1) + "px")
+                                    .style("background-size", "100% 100%");
+                                var ctx = canvas.node().getContext('2d');
+
+                                var d = d.saliency;
+                                var range = d3.extent(d, d => d.val);
+                                var jet = interpolateJet();
+
+                                range[1] = range[1] == 0 ? 1 : range[1];
+                                range[0] = Math.max(0, range[0])
+                                color = x => jet((x - range[0]) / (range[1] - range[0]))
+
+                                var img_data = ctx.createImageData(d3.max(d, d => d.x) + 1, d3.max(d, d => d.y) + 1);
+                                for (var [i, v] of d.entries()) {
+                                    var c = d3.color(color(v.val));
+                                    img_data.data[4 * i] = c.r;
+                                    img_data.data[4 * i + 1] = c.g;
+                                    img_data.data[4 * i + 2] = c.b;
+                                    img_data.data[4 * i + 3] = 170;
+                                }
+                                ctx.putImageData(img_data, 0, 0);
+                                ctx.globalAlpha = 0.5;
+
+                                d3.select(this).append("img").attr("src", d => `/site/class_image/${d.id.replace("label_", "")}.png`)
+                                    .attr("class", "saliency_class_tip")
+                                    .attr("width", d => (d3.max(d.saliency, d => d.x) + 1) + "px")
+                                    .attr("height", d => (d3.max(d.saliency, d => d.y) + 1) + "px")
+                                    .style("display", "none");
+                            }
+                        );
+
+                    rescale_swox_result();
+                    set_loading(false);
+                }
+            ).fail(function (xhr, status, error) {
+                // error handling
+                set_loading(false);
+                alert("Some faults happen on server!")
+            });
+        }
+
+        function rescale_swox_result() {
+            d3.selectAll(".swox_saliency_result").style("zoom", "" + base_scale * result_scale);
+        }
+
+        function create_class_ranger() {
+            var canvas = d3.select("#cluster_ranger");
+            canvas.selectAll("g").remove();
+            var array = clusters;
+            //console.log(clusters);
+            var cluster_pads = canvas.append("g");
+            var class_pads = canvas.append("g");
+            var label_pads = canvas.append("g");
+            var image_pads = canvas.append("g");
+
+            var drag_h = d3.drag().on("start", function () {
+                //console.log(array);
+                var target = d3.select(this)
+                var pos = d3.mouse(this);
+                target.transition().duration(200)
+                    .attr("height", 10)
+                    .attr("width", 10)
+                    .attr("x", pos[0] - 5)
+                    .attr("y", pos[1] - 5)
+                    .attr("rx", 5)
+                    .attr("ry", 5)
+                    .style("opacity", 1);
+                var row = target.data()[0][1];
+                var col = target.data()[0][2];
+                class_pads.selectAll("rect").filter(d => d[1] == row && d[2] != col)
+                    .transition().duration(200)
+                    .attr("x", function (d) {
+                        d[2] = d[2] < col ? d[2] : d[2] - 1;
+                        return 175 * d[2] + 15;
+                    });
+
+                d3.select("#cluster_ranger_image_" + target.data()[0][0]).remove();
+
+                image_pads.selectAll("image").filter(d => d[1] == row)
+                    .transition().duration(200)
+                    .attr("x", function (d) {
+                        //console.log(d[2])
+                        //d[2] = d[2] < col ? d[2] : d[2] - 1;
+                        return 175 * d[2] + 25;
+                    });
+
+                d3.select("#cluster_ranger_label_" + target.data()[0][0]).remove();
+
+                label_pads.selectAll("text").filter(d => d[1] == row)
+                    .transition().duration(200)
+                    .attr("x", function (d) {
+                        //console.log(d[2])
+                        //d[2] = d[2] < col ? d[2] : d[2] - 1;
+                        return 175 * d[2] + 25;
+                    });
+
+                label_pads.selectAll("text").filter(d => d[1] == row).selectAll("tspan")
+                    .transition().duration(200)
+                    .attr("x", function (d) {
+                        return d3.select(this).attr("x") > pos[0] ?
+                            d3.select(this).attr("x") - 175 : d3.select(this).attr("x");
+                    });
+
+                cluster_pads.selectAll("rect").filter((d, i) => i != row)
+                    .transition()
+                    .duration(200)
+                    .style("opacity", 0.1);
+
+                d3.select("#cluster_ranger_cluster_" + row)
+                    .transition()
+                    .duration(200)
+                    .attr("width", d => 175 * (d.length - 1) + 42)
+            })
+                .on("drag", function () {
+                    var pos = d3.mouse(this);
+                    d3.select(this).attr("x", pos[0] - 5).attr("y", pos[1] - 5);
+                    var current_row = Math.floor(pos[1] / 145);
+
+                    //console.log(current_row, array);
+                    cluster_pads.selectAll("rect").style("opacity", (d, i) => i == current_row ? 0.2 : 0.1);
+                })
+                .on("end", function () {
+                    var pos = d3.mouse(this);
+                    var current_row = Math.floor(pos[1] / 145)
+                    var point = d3.select(this).data()[0];
+                    //console.log(array);
+                    array = array.map((x, i) => x.filter((d, j) => i != point[1] || j != point[2]));
+                    //console.log("push", array);
+                    if (current_row < array.length) {
+                        array[current_row].push(point[0]);
+                        //console.log("push", array);
+                    } else {
+                        array.push([point[0]])
+                        //console.log("push", array);
+                    }
+                    array = array.filter(d => d.length > 0);
+
+                    cluster_pads.selectAll("rect").remove();
+                    class_pads.selectAll("rect").remove();
+                    image_pads.selectAll("image").remove();
+                    label_pads.selectAll("text").remove();
+
+                    update_cluster_ranger();
+                    //disable the switch
+                    //$("#cluster_ranger_switch").attr("href", "javascript: alert('cannot go back!');").css("color", "gray");
+                    $("#explain_cwox").attr("disabled", false);
+                })
+
+            function wrap_inside(d) {
+                var text = indx2label[d[0].replace(/c0*/, "")][1].replace("_", " ");
+                var ptr = d3.select(this);
+                ptr.selectAll("tspan").data(wrap(text, 25)).join("tspan")
+                    .attr("x", ptr.attr("x"))
+                    .attr("dy", "1.2em")
+                    .text(seg => seg);
+            }
+
+            update_cluster_ranger = function () {
+                var max_col = Math.max(5, d3.max(array, d => d.length));
+                var max_row = array.length;
+                canvas.style("height", Math.max(640, max_row * 145 + 50) + "px").style("width", Math.max(950, max_col * 175 + 50) + "px");
+
+                cluster_pads.selectAll("rect").data(array).join("rect")
+                    .attr("width", d => 175 * d.length + 42)
+                    .attr("height", 125)
+                    .attr("rx", 7)
+                    .attr("ry", 7)
+                    .attr("id", (d, i) => "cluster_ranger_cluster_" + i)
+                    .attr("x", 10)
+                    .attr("y", (d, i) => 145 * i)
+                    .style("opacity", 0.2)
+                    .style("fill", (d, i) => d3.interpolatePuBu(1 - 0.5 * i / max_row))
+                    .style("stroke", "black")
+                    .style("stroke-width", 2);
+
+                var array_loc = array.map((x, i) => x.map((d, j) => [d, i, j])).flat();
+
+                class_pads.selectAll("rect").data(array_loc).join("rect")
+                    .attr("id", d => "cluster_ranger_class_" + d[0])
+                    .attr("x", d => 175 * d[2] + 15)
+                    .attr("y", d => 145 * d[1] + 9)
+                    .attr("height", 110)
+                    .attr("width", 165)
+                    .attr("rx", 5)
+                    .attr("ry", 5)
+                    .style("opacity", 0.42)
+                    .style("fill", d => d3.interpolatePuBu(1 - 0.5 * d[1] / max_row))
+                    .call(
+                        drag_h
+                    );
+
+                image_pads.selectAll("image").data(array_loc).join("image")
+                    .attr("id", d => "cluster_ranger_image_" + d[0])
+                    .attr("x", d => 175 * d[2] + 25)
+                    .attr("y", d => 145 * d[1] + 15)
+                    .attr("height", 110)
+                    .attr("width", 110)
+                    .attr("href", d => "/site/class_image/" + d[0].replace(/c0*/, "") + ".png")
+                    .style("pointer-events", "none");
+
+                label_pads.selectAll("text").data(array_loc).join("text")
+                    .attr("id", d => "cluster_ranger_label_" + d[0])
+                    .attr("x", d => 175 * d[2] + 25)
+                    .attr("y", d => 145 * d[1] + 12)
+                    .style("fill-opacity", 0.5)
+                    .style("font-size", 12)
+                    .each(wrap_inside);
+
+
+            }
+            update_cluster_ranger();
+        }
+
+        function update_dendrogram() {
+            var selected = $('#label_selection').val();
+            var tree = get_subtree(selected);
+
+            function srk_tree(node) {
+                var original_id = node.id
+                node.srked = false;
+                while (node.children.length == 1) {
+                    node.id = node.children[0].id;
+                    node.prototype = node.children[0].prototype
+                    node.children = node.children[0].children;
+                    node.srked = true;
+                }
+                node.id = node.id == original_id || node.children.length == 0 ? node.id : original_id + "... " + node.id;
+                for (sub_node of node.children) {
+                    srk_tree(sub_node);
+                }
+            }
+            srk_tree(tree.data);
+            tree = d3.hierarchy(tree.data);
+
+            //console.log(tree);
+            var canvas = d3.select("#dendrogram_view")
+            canvas.selectAll("g").remove()
+            canvas.style("height", 0).style("width", 0);
+
+            var height = $("#canvas_1").height();
+            var row_height = Math.min(160, Math.max((height - 100) / selected.length, 120));
+            height = row_height * selected.length + 100;
+            var width = $("#canvas_1").width() - 40;
+            var col_width = Math.min(270, (width - 120 - row_height) / tree.height);
+            width = col_width * tree.height;
+
+            var cluster_t = d3.cluster().size([height, width]);
+            cluster_t(tree);
+
+            tree.leaves().map(function (node, i) { node.x = row_height * i + 50; })
+
+            tree.eachAfter(function (node) {
+                if (node.children) {
+                    node.x = node.children.map(d => d.x).reduce((a, b) => a + b, 0) / node.children.length;
+                    node.x = 0.4 * node.x + 0.6 * d3.min(node.children, d => d.x);
+                }
+            })
+            var max_x = d3.max(tree.descendants(), d => d.x);
+            //canvas.attr("transform", `translate(${0.5*($("#canvas_1").width() - 40 - 120 - row_height - max_x)},0)`)
+            /*
+            //update d.y
+            var max_depth = d3.max(tree.leaves(), d => d.depth);
+            for (var node of tree.descendants()) {
+                node.y = 750* node.depth / max_depth;
+            }
+            */
+
+            canvas.style("height", Math.max(640, height) + "px").style("width", width + 120 + row_height + "px");
+            canvas.append("g").style("opacity", 0.5)
+                .selectAll("path").data(tree.descendants().slice(1)).join("path")
+                .attr("transform", "translate(50, 0)")
+                .attr("d", (d, i) => "M" + d.y + "," + d.x
+                    + " L " + (d3.min(d.parent.children, n => n.y) - 40) + " " + d.x
+                    + " L " + (d3.min(d.parent.children, n => n.y) - 40) + " " + d.parent.x
+                    + " L " + d.parent.y + " " + d.parent.x
+                )
+                .style("fill", 'none').attr("stroke-width", 2).attr("stroke", d => fill(d.parent))
+            //.attr("stroke-dasharray", d => d.parent.data.srked? "5": "none");
+
+            function fill(d) {
+
+                var index = clusters.findIndex(c => d.leaves().every(l => c.includes(l.data.id)));
+                if (index == -1) {
+                    return 'gray';
+                } else {
+                    return d3.interpolatePuBu(1 - 0.5 * index / clusters.length);
+                }
+            }
+
+            canvas.append("g").selectAll("circle").data(tree.descendants()).join("circle")
+                .attr("transform", "translate(50, 0)")
+                .attr("cx", d => d.y)
+                .attr("cy", d => d.x)
+                .attr("r", d => d.height == 0 && !d.data.srked ? 9 : 12)
+                .style("fill", fill)
+                .on("click", function () {
+                    var target_data = d3.select(this).data()[0];
+                    var leaves = target_data.leaves().map(d => d.data.id);
+                    if (target_data.height == 0 && !target_data.data.srked) {
+                        return;
+                    }
+                    var idx = clusters.findIndex(d => leaves.every(d1 => d.includes(d1)));
+                    if (idx == -1) {
+                        //merge
+                        var fil_clusters = clusters.map(d => d.filter(d1 => !leaves.includes(d1)))
+                        var idx = fil_clusters.findIndex(d => d.length == 0);
+                        fil_clusters = fil_clusters.filter(d => d.length > 0);
+
+                        fil_clusters.splice(idx, 0, leaves);
+                        clusters = fil_clusters;
+                        clusters = reorder_clusters(clusters);
+                    } else {
+                        //split
+                        var sub_root = target_data.ancestors().find(function (d) {
+                            var ids = d.leaves().map(d1 => d1.data.id);
+                            return clusters[idx].every(d1 => ids.includes(d1));
+                        });
+                        var root = target_data.ancestors().slice(-1);
+                        var this_height = d3.select(this).data()[0].height;
+                        var new_clusters = sub_root.descendants()
+                            .filter(d => d.parent && d.parent.height > this_height && d.height <= this_height)
+                            .map(d => d.leaves().map(d1 => d1.data.id));
+
+                        //console.log(new_clusters);
+                        clusters.splice(idx, 1);
+                        for (var nc of new_clusters.reverse()) {
+                            clusters.splice(idx, 0, nc)
+                        }
+                        clusters = reorder_clusters(clusters);
+                    }
+
+                    create_class_ranger();
+                    update_dendrogram();
+                    $("#explain_cwox").attr("disabled", false);
+                });
+
+            canvas.append("g").selectAll("image").data(tree.leaves()).join("image")
+                .attr("transform", "translate(72, 0)")
+                .attr("x", d => d.y)
+                .attr("y", d => d.x)
+                .attr("height", row_height - 20)
+                .attr("width", row_height - 20)
+                .attr("href", d => "/site/class_image/" + d.data.id.replace(/c0*/, "") + ".png");
+
+            canvas.append("g").selectAll("text").data(tree.descendants()).join("text")
+                .attr("transform", "translate(72, -17)")
+                .attr("x", d => d.y)
+                .attr("y", d => d.x)
+                .style("fill-opacity", 0.5)
+                .style("font-size", 12)
+                .each(function (d) {
+                    var text = d.height != 0 ? d.data.id : indx2label[d.data.id.replace(/c0*/, "")][1].replace("_", " ");
+                    var ptr = d3.select(this)
+                    ptr.selectAll("tspan").data(wrap(text, 25)).join("tspan")
+                        .attr("x", ptr.attr("x"))
+                        .attr("dy", "1.2em")
+                        .text(seg => seg);
+                });
+            /*
+            canvas.append("g").selectAll("image").data(tree.descendants().filter(d => d.height != 0 && d.data.id != "root")).join("image")
+                .attr("transform", "translate(57, 6)")
+                .attr("x", d => d.y)
+                .attr("y", d => d.x)
+                .attr("height", 100)
+                .attr("width", 100)
+            */
+            //.attr("href", d => "/site/class_image/" + d.data.prototype.replace(/c0*/, "") + ".png");
+        }
+
+        function update_selection_box(mode, c_perp) {
+            if (c_perp != undefined) {
+                c_perp = Math.min(c_perp, 5)
+                var range_max = $("#label_filter_num").attr("max");
+                c_perp = Math.min(range_max, c_perp);
+                $("#label_filter_num").val(c_perp);
+            }
+
+            var selection_box = d3.select("#label_selection");
+            var data = selection_box.selectAll("option").data();
+
+            var k = $("#label_filter_num").val();
+            var thres = $('#label_filter_per').val();
+            if (mode == "init") {
+                var k_t = data.map(d => d[3]).findIndex(d => (thres -= d) <= 0) + 1;
+                k = k_t <= 0 ? k : Math.min(k_t, k);
+                $('#label_filter_num').val(k);
+                thres = data.map(d => d[3]).slice(0, Math.ceil(k)).reduce((a, b) => a + b, 0);
+                $('#label_filter_per').val(thres);
+            } else if (mode == "num") {
+                thres = data.map(d => d[3]).slice(0, Math.ceil(k)).reduce((a, b) => a + b, 0);
+                $('#label_filter_per').val(thres);
+            } else if (mode == "per") {
+                k = data.map(d => d[3]).findIndex(d => (thres -= d) <= 0) + 1;
+                k = k <= 0 ? data.length : k;
+                k = Math.min(k, $("#label_filter_num").attr("max"))
+                $('#label_filter_num').val(k);
+            }
+            selection_box.selectAll("option")
+                .property("value", d => d[2])
+                .property("selected", (d, i) => i < k)
+                .style("display", (d, i) => i < k ? "block" : "none")
+                .html(
+                    (d, i) => `${d[1]}`.padEnd(20, "\xA0") + "\xA0" + `${(d[3] * 100).toFixed(3)}%`.padStart(7, "\xA0")
+                        + (i < k ? "\xA0>" : "\xA0") //&check;
+                );
+            $("#explain_cwox").attr("disabled", $("#label_selection").val().length == 0);
+            $("#explain_swox").attr("disabled", $("#label_selection").val().length == 0);
+            var filter_num_max = $("#label_filter_num").attr("max");
+            var filter_num_val = $("#label_filter_num").val();
+            $("#label_filter_num_ind").html("Number of top labels: "
+                + `<input type="number" id="filter_num_input" name="filter_num_input" min="1" max="
+                ${filter_num_max}" style="width:${filter_num_val.length}ch">`);
+            $("#filter_num_input").val(filter_num_val);
+            $("#filter_num_input").on("input", function () {
+                var val = parseInt(this.value);
+                if (!isNaN(val) && val > 0 && val <= data.length) {
+                    if (val > parseInt($("#label_filter_num").attr("max"))) {
+                        $("#label_filter_num").attr("max", val);
+                    }
+                    $("#label_filter_num").val(val);
+                    update_selection_box("num");
+                    $("#filter_num_input").val("").focus().val(val);
+                }
+            })
+            var filter_per_val = ($("#label_filter_per").val() * 100).toFixed(3);
+            $("#label_filter_per_ind").html("Percentage of top labels: "
+                + `<input type="text"
+                id="filter_per_input" name="filter_per_input" min="0" max="100" step="0.001"
+                style="width:${filter_per_val.length}ch"> %`);
+            $("#filter_per_input").val(filter_per_val);
+            $("#filter_per_input").on("input", function () {
+                var pattern = /(100|\d{1,2})(\.\d*)?/;
+                var match = this.value.match(pattern);
+                this.value = match ? match[0] : "";
+                var val = parseFloat(this.value);
+                if (!isNaN(val) && val > 0 && val < 100) {
+                    $("#label_filter_per").val(val / 100);
+                    update_selection_box("per");
+                    $("#filter_per_input").val("").focus().val(this.value);
+                }
+            })
+            reload_cluster();
+        }
+
+        function preview_load() {
+            if (event.target.files[0]) {
+                $("#preview_image").attr("src", URL.createObjectURL(event.target.files[0]));
+                $("#explain_cwox").attr("disabled", true);
+                $("#explain_swox").attr("disabled", true);
+                submit();
+            } else {
+                $("#preview_image").attr("src", "");
+                $("#explain_cwox").attr("disabled", true);
+                $("#explain_swox").attr("disabled", true);
+            }
+        }
+
+        function interpolateJet() {
+            //The steps in the jet colorscale
+            const jet_data_lin = [
+                [0, 0, 0.5],
+                [0, 0, 1],
+                [0, 0.5, 1],
+                [0, 1, 1],
+                [0.5, 1, 0.5],
+                [1, 1, 0],
+                [1, 0.5, 0],
+                [1, 0, 0],
+                [0.5, 0, 0]
+            ]
+
+            const jet_rgb = jet_data_lin.map(x => {
+                return d3.rgb.apply(null, x.map(y => y * 255))
+            })
+
+            //perform piecewise interpolation between each color in the range
+            return d3.piecewise(d3.interpolateRgb, jet_rgb)
+        }
+
+
+    </script>
+</body>
+
+</html>

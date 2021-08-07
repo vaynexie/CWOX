@@ -1,0 +1,19 @@
+@relation sparse-catdata
+
+@attribute a1 {s0,s1}
+@attribute a2 {s0,s1}
+@attribute a3 {s0,s1}
+@attribute a4 {s0}
+@attribute a5 {s0,s1}
+
+@data
+s0,s0,s0,s0,s0
+s0,s0,s0,s0,s0
+s0,s0,s0,s0,s0
+s1,s0,s0,s0,s1
+s1,s0,s0,s0,s1
+s0,s1,s0,s0,s0
+s1,s1,s1,s0,s1
+s1,s1,s1,s0,s1
+s1,s1,s1,s0,s1
+s1,s1,s1,s0,s1

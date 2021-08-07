@@ -3,12 +3,15 @@ from flask_session import Session
 import json, base64, io
 from PIL import Image
 import numpy as np
+import mindspore as ms
+import mindspore.ops.operations as P
+import mindspore.ops.functional as F
 
-import torch, torchvision
+Tensor = ms.Tensor
+exp_ms = P.Exp()
+sum_ms = P.ReduceSum()
+log_ms = P.Log()
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
-as_numpy = lambda x: x.detach().cpu().numpy()
-as_tensor = lambda x: torch.tensor(x).to(device)
 
 with open("./site/imagenet_class_index.json") as f:
     indx2label = json.load(f)
@@ -18,7 +21,8 @@ with open("./site/support_info.json") as f:
     supported_methods = {method["value"]: method for method in support_info["methods"]}
     supported_models = {model["value"]: model for model in support_info["models"]}
 
-
+import mindspore.nn as nn
+softmax = nn.Softmax()
 def decode_predictions(preds, k=200):
     # return the top k results in the predictions
     return [
@@ -26,32 +30,36 @@ def decode_predictions(preds, k=200):
             (*indx2label[str(i)], i.item(), pred[i].item())
             for i in pred.argsort()[::-1][:k]
         ]
-        for pred in as_numpy(preds)
+        for pred in preds.asnumpy()
     ]
 
 image_shape = [224, 224]
 
-transform = torchvision.transforms.Compose(
-    [
-        torchvision.transforms.Resize(image_shape),
-        torchvision.transforms.ToTensor(),
-        torchvision.transforms.Normalize(
-            mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
-        ),
-    ]
-)
+import mindspore.dataset.vision.c_transforms as C
+def transform(img, size):
+    img = np.array(img.resize(size, Image.BILINEAR))
+    img = img / 255
+    img = C.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))(img)
+    img= C.HWC2CHW()(img)
+    img =img[np.newaxis,:]
+    return Tensor(img)
 
 get_tree = lambda x: [
     {"name": name, "children": get_tree(children)}
     for name, children in x.named_children()
 ]
 
+from mindspore.explainer.explanation._attribution._CWOX.imagenet_model.resnet50 import resnet_imagenet
+from mindspore.explainer.explanation._attribution._CWOX.imagenet_model.googlenet import googlenet_imagenet
+model_gen = {
+        "resnet50": resnet_imagenet,
+        "googlenet": googlenet_imagenet
+        }
 
 def load_model(name):
     assert name in supported_models.keys()
-    model = getattr(torchvision.models, name)(pretrained=True)
-    model.to(device)
-    model.eval()
+    model_fn = model_gen[name]
+    model = model_fn()
     #modules = {"name": name, "children": get_tree(model)}
     return model
 
@@ -95,22 +103,17 @@ def normalize(x):
     x[x.isnan()] = 0
     return x
 
-from grad_cam_mwp_cwox import grad_cam_cwox, mwp_cwox
-from rise_cwox import rise_cwox
-from lime_cwox import lime_cwox
+from cwox import grad_cam, mwp, rise, lime
 def explain_cwox(x, model, method, clusters, para):
     assert method in supported_methods
     if method == "grad_cam":
-        res = grad_cam_cwox(x, model, clusters, para["cluster_layer"], para["class_layer"])
+        res = grad_cam(x, model, clusters, para["cluster_layer"], para["class_layer"])
     elif method == "mwp":
-        res = mwp_cwox(x, model, clusters, para["cluster_layer"], para["class_layer"])
+        res = mwp(x, model, clusters, para["cluster_layer"], para["class_layer"])
     elif method == "rise":
-        s_cluster, s_class = int(para["Mask_Size_cluster"]), int(para["Mask_Size_class"])
-        p_cluster, p_class = float(para["Mask_Prob_cluster"]), float(para["Mask_Prob_class"])
-        res = rise_cwox(x, model, clusters, s_cluster, p_cluster, s_class, p_class)
+        res = rise(x, model, clusters)
     elif method == "lime":
-        ker_size_cluster = int(para["Kernel_Size_cluster"])
-        res = lime_cwox(x, model, clusters, ker_size_cluster)
+        res = lime(x, model, clusters)
     else:
         assert False
     explanation = [
@@ -127,8 +130,8 @@ def explain_swox(x, model, method, labels, para):
     elif method == "mwp":
         res = mwp_swox(x, model, labels, para["layer"])
     elif method == "rise":
-        s, p = int(para["Mask_Size"]), float(para["Mask_Prob"])
-        res = rise_swox(x, model, labels, s, p)
+        S, P = int(para["Mask_Size"]), float(para["Mask_Prob"])
+        res = rise_swox(x, model, labels, S, P)
     elif method == "lime":
         ker_size = int(para["Kernel_Size"])
         res = lime_swox(x, model, labels, ker_size)
@@ -161,22 +164,22 @@ def create_app():
     @app.route("/upload", methods=["POST"])
     def upload_handler():
         image = request.files["image"]
+
         image = Image.open(image).convert("RGB")
-        x = transform(image)[None]
-        x = x.to(device)
+        x = transform(image, image_shape)
         session["target_input"] = x
 
         model_name = request.form["model"]
         assert model_name in supported_models.keys()
         model = load_model(model_name)
-        session["model"] = model
         session["model_name"] = model_name
         #session["modules"] = modules
 
         logits = model(x)
-        preds = logits.softmax(-1)
-        c_perp = (-preds * preds.log()).sum().exp().item()
+        preds = softmax(logits)
         results = decode_predictions(preds)[0]
+        c_perp = exp_ms(sum_ms(-preds * log_ms(preds))).asnumpy().item()
+        print(c_perp)
         return json.dumps({"preds": results, "c_perp": c_perp})
 
     @app.route("/explain", methods=["POST"])
@@ -187,7 +190,7 @@ def create_app():
             for cluster in json.loads(clusters)
         ]
         model_name = session["model_name"]
-        model = session["model"]
+        model = load_model(model_name)
         x = session["target_input"]
         method = request.form["saliency_map"]
         explain_type = request.form["type"]
@@ -208,7 +211,6 @@ def create_app():
 
         para = {**para_cluster_default, **para_class_default, **para_nat_default}
         para.update(json.loads(request.form["saliency_parameters"]))
-        print(para)
 
         if explain_type == "cwox":
             explanation = explain_cwox(

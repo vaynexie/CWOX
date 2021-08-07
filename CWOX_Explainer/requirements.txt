@@ -1,6 +1,3 @@
-lime
-torchvision
-torchray
 flask
 Flask-Session
-
+mindspore_CWOX

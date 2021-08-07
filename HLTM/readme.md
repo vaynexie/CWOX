@@ -34,8 +34,6 @@ It is built from the Top K prediction classes of ImageNet training set, where K=
 **/scripts/convert.py:**
 code to convert the .npy file into sparse file format that can processed by the HLTM learning code. 
 
-
-
 -----------------------------------------------------------------------------------------------------------------------
 ## Learning HLTM
 #### The released package v1.0 HLTA-XAI.jar can be found in https://github.com/kmpoon/hlta-xai/releases/tag/v1.0
@@ -76,8 +74,8 @@ In the above, `output_name` is the name of the output tree, `output_name` is the
 We use ResNet50 and GoogleNet in the case of ImageNet Image Classification as examples. The whole output trees for the two models can be seen in:
 
 <!-- TOC -->
-- ResNet50 -- [Tree](https://hkust-huawei-xai.github.io/final_submit/resnet50), [Resutled JSON file](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/HLTM/result_json/ResNet50.json) ;  
-- GoogleNet -- [Tree](https://hkust-huawei-xai.github.io/final_submit/googlenet), [Resutled JSON file](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/HLTM/result_json/GoogleNet.json) .
+- ResNet50 -- [Tree](https://hkust-huawei-xai.github.io/final_submit/resnet50), [Resutled JSON file](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/mindspore/HLTM/result_json/ResNet50.json) ;  
+- GoogleNet -- [Tree](https://hkust-huawei-xai.github.io/final_submit/googlenet), [Resutled JSON file](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/mindspore/HLTM/result_json/GoogleNet.json) .
 <!-- TOC -->
 
 For easy comprehension, a representative image of each class is included in the tree structures. Those images are not a part of the models. 

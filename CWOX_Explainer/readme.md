@@ -8,9 +8,7 @@ This is a document about the usage of our CWOX Explainer.
 
 Make sure you have cuda available on your machine if your are going to serve it locally.
 
-* lime
-* torchvision
-* torchray
+* mindspore\_CWOX
 * flask
 * Flask-Session
 

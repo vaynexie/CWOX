@@ -53,7 +53,7 @@ metric_type = ['CAUC', 'CDROP']
 metric = CausalMetric(model=model_eval,metric=metric_type, step = 16, batch_size = 8,delta = 0.5,tau_thres=0.05,smooth_len=3)
 ```
 
-### 3. Usage and Example (can also see the [*example.py*](https://github.com/HKUST-HUAWEI-XAI/CWOX/blob/main/Evaluation/example.py))
+### 3. Usage and Example (can also see the [*example.py*](https://github.com/vaynexie/CWOX/blob/main/Evaluation/example.py))
 
 We show an example to evaluate one of the CWOX explanation results for an image with Grad-CAM as base explainer using ResNet50. 
 
@@ -85,7 +85,7 @@ def load_example():
 ```python
 #-------------------Load the Example and Explanation-------------------
 '''
-The image 'cello_guitar.jpg' can be found in eval_image: https://github.com/HKUST-HUAWEI-XAI/CWOX/tree/main/eval_image
+The image 'cello_guitar.jpg' can be found in eval_image: https://github.com/vaynexie/CWOX/tree/main/eval_image
 
 ResNet50 Top 5 prediction classes for cello_guitar.jpg:
 cello(0.839), acoustic-guitar (0.081), banjo (0.036), violin (0.021), electric-guitar (0.008)

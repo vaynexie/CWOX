@@ -22,7 +22,7 @@ The building of hierarchical latent tree model (HLTM) in part A requires Java 11
 
 ----------
 
-#### In the following, we give the step-by-step tutorial for generating the CWOX-2s explanations.
+### In the following, we give the step-by-step tutorial for generating the CWOX-2s explanations.
 
 
 ## [A. Label Confusion Clusters Idenification](https://github.com/xie-lin-li/CWOX/tree/main/HLTM)

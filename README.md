@@ -2,9 +2,7 @@
 
 ## What Is CWOX-2s
 
-![image](https://user-images.githubusercontent.com/69588181/123748855-5a5cac80-d8e7-11eb-8bf0-a6228e5236a3.png)
-
-
+![whole](https://github.com/vaynexie/CWOX/assets/55047915/45d6170b-5174-4a84-a079-5c6dda211def)
 <div align="center",class='inBold'>
  <b>Figure 1</b>
 </div>

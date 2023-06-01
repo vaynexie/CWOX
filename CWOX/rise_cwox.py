@@ -70,9 +70,10 @@ class rise_cwox():
         masks=generate_masks(self.N, self.down_sample_size, self.mask_probability, input_size)
         # Apply array of filters to the image
         stack = torch.mul(masks, image)
-        p = []   
-        for i in range(0, self.N, self.gpu_batch):
-            p.append(self.model(stack[i:min(i + self.gpu_batch, self.N)]))
+        p = []
+        with torch.no_grad():
+            for i in range(0, self.N, self.gpu_batch):
+                p.append(self.model(stack[i:min(i + self.gpu_batch, self.N)]))
         p = torch.cat(p)
         # Number of classes
         CL = p.size(1)

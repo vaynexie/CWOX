@@ -21,7 +21,7 @@ def one_v_one(class_use,class_not_use,sal_dict):
     if len(class_not_use)==0:
         return pos_sal
 
-def CWOX(image,cluster_list,cluster_method,class_method,delta=0,multiple_output=False):
+def CWOX_2s(image,cluster_list,cluster_method,class_method,delta=0,multiple_output=False):
 
     r"""
     Inputs:
@@ -61,7 +61,7 @@ def CWOX(image,cluster_list,cluster_method,class_method,delta=0,multiple_output=
     >>> IOX_cluster=IOX(grad_cam_cwox(model,layer='layer4'))
     >>> IOX_class=IOX(grad_cam_cwox(model,layer='layer3.5.relu'))
     >>> cluster_use_final=[[486,889],[402,420,546]]
-    >>> sal_dict=CWOX(image,cluster_use_final,cluster_method=IOX_cluster,class_method=IOX_class,delta=50,multiple_output=False)
+    >>> sal_dict=CWOX_2s(image,cluster_use_final,cluster_method=IOX_cluster,class_method=IOX_class,delta=50,multiple_output=False)
     """
     
     sal_dict={}

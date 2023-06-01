@@ -13,15 +13,6 @@
  **CWOX-2s (Two-Stage Contrastive Whole-output Explanation)**  is a novel explanation framework where one can examine the evidence for competing classes, and thereby obtains contrastive explanations for Image Classification (see paper [add link when the paper is released to public] for details and citations).
 
 
-We provide Pytorch Implementation and Mindspore Implementation for CWOX-2s:
-
-<!-- TOC -->
-- Pytorch Implementation - this branch
-
-- [Mindspore Implementation](https://github.com/xie-lin-li/CWOX/tree/mindspore)
-
-<!-- /TOC -->
-
 ## [A. Label Confusion Clusters Idenification](https://github.com/xie-lin-li/CWOX/tree/main/HLTM)
 
 CWOX-2s has a preprocessing step that partitions all class labels into confusion clusters with respect to the classifier to be explained. Classes in each of those clusters (e.g., cello, violin) are confusing to the classifier, and are often competing labels for the same object/region in the input image. CWOX-2s does so by analyzing the co-occurrence of labels in classification results and thereby building a hierarchical latent tree model (HLTM):

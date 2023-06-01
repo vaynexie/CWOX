@@ -35,7 +35,7 @@ CWOX-2s has a preprocessing step that partitions all class labels into confusion
  <b>Figure 2</b>
 </div>
 
-The codes for learning HLTMs are given in the sub-directory [HLTM](https://github.com/xie-lin-li/CWOX/tree/main/HLTM), along with the structures of the models obtained for [ResNet50](https://xie-lin-li.github.io/final_submit/resnet50) and [GoogleNet](https://xie-lin-li.github.io/final_submit/googlenet). The HLTM codes output a json file named **output_name_fullname.nodes.json**, which includes the learned hierarchical latent tree model. The json file is used in the following partition of label confusion clusters. The **ResNet50.json** in the example code shown below is renmaned from the **output_name_fullname.nodes.json**.
+The codes for learning HLTMs are given in the sub-directory [HLTM](https://github.com/xie-lin-li/CWOX/tree/main/HLTM), along with the structures of the models obtained for [ResNet50](https://xie-lin-li.github.io/final_submit/resnet50) and [GoogleNet](https://xie-lin-li.github.io/final_submit/googlenet). The HLTM codes output a json file named **output_name_fullname.nodes.json**, which includes the learned hierarchical latent tree model. The json file is used in the following partition of label confusion clusters. The **ResNet50.json** in the example code shown below is renamed from the **output_name_fullname.nodes.json**.
 
 When interpreting the output of the classifier on a target image, CWOX-2s obtains a subtree for the top classes by removing from the HLTM all the irrelevant nodes. The top classes are partitioned into **Label Confusion Clusters** by cutting the subtree at a certain level, the default being the lowest level. This is how the two clusters in Figure 1 are obtained from the tree in Figure 2. 
 

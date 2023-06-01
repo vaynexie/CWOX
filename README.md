@@ -22,7 +22,7 @@ The building of hierarchical latent tree model (HLTM) in part A requires Java 11
 
 ----------
 
-
+#### In the following, we give the step-by-step tutorial for generating the CWOX-2s explanations.
 
 
 ## [A. Label Confusion Clusters Idenification](https://github.com/xie-lin-li/CWOX/tree/main/HLTM)
@@ -30,9 +30,9 @@ The building of hierarchical latent tree model (HLTM) in part A requires Java 11
 CWOX-2s has a preprocessing step that partitions all class labels into confusion clusters with respect to the classifier to be explained. Classes in each of those clusters (e.g., cello, violin) are confusing to the classifier, and are often competing labels for the same object/region in the input image. CWOX-2s does so by analyzing the co-occurrence of labels in classification results and thereby building a hierarchical latent tree model (HLTM):
 
 <p align="center">
-
  <img src="https://user-images.githubusercontent.com/69588181/120742320-3e086280-c529-11eb-9575-7e78593726fe.png" height="500" width="700">
 </p>
+
 <div align="center",class='inBold'>
  <b>Figure 2</b>
 </div>

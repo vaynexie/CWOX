@@ -16,7 +16,7 @@
 
 Requirement:
 
-The main part of the codes is based PyTorch, please refer to the requirements.txt for the detailed requirements of package version;
+The main part of the codes is based PyTorch, please refer to the [**requirements.txt**](https://github.com/vaynexie/CWOX/blob/main/requirements.txt) for the detailed requirements of package version;
 
 The building of hierarchical latent tree model (HLTM) in part A requires Java 11 and Scala 2.12.12.
 

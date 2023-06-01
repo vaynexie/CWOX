@@ -213,7 +213,8 @@ Application to perform the Contrastive Whole-out Explanation Process. Currently 
 
 See the [README page](https://github.com/xie-lin-li/CWOX/blob/main/CWOX_Explainer/readme.md) in the sub-directory CWOX_Explainer for the guidelines to use the Application.
 
--------------
+----------
 
-#### Contact: Vayne Xie, wxieai@cse.ust.hk, HKUST.
+# Enquiry
 
+* Vayne Xie (wxieai@cse.ust.hk) (The Hong Kong University of Science and Techonology)

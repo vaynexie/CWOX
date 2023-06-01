@@ -12,6 +12,18 @@
 
  **CWOX-2s (Two-Stage Contrastive Whole-output Explanation)**  is a novel explanation framework where one can examine the evidence for competing classes, and thereby obtains contrastive explanations for Image Classification (see paper [add link when the paper is released to public] for details and citations).
 
+---------
+
+Requirement:
+
+The main part of the codes is based PyTorch, please refer to the requirements.txt for the detailed requirements of package version;
+
+The building of hierarchical latent tree model (HLTM) in part A requires Java 11 and Scala 2.12.12.
+
+----------
+
+
+
 
 ## [A. Label Confusion Clusters Idenification](https://github.com/xie-lin-li/CWOX/tree/main/HLTM)
 

@@ -215,5 +215,5 @@ See the [README page](https://github.com/xie-lin-li/CWOX/blob/main/CWOX_Explaine
 
 -------------
 
-Contact: Vayne Xie, wxieai@cse.ust.hk, HKUST.
+#### Contact: Vayne Xie, wxieai@cse.ust.hk, HKUST.
 

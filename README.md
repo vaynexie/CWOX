@@ -65,7 +65,8 @@ print(cluster_resnet50)
 '''
 Output Results: [[486, 889], [402, 420, 546]],
 which indicates that the top-5 classes are divided into two clusters suggested by the ResNet50 HLTM lowest-level latent node:
-Cluster 1: cello, violin; Cluster 2: acoustic guitar, banjo, electric guitar.
+Cluster 1: cello, violin; 
+Cluster 2: acoustic guitar, banjo, electric guitar.
 '''
 ```
 
@@ -83,13 +84,12 @@ A score function is needed in order to produce a base heatmap for a class c. It 
 
 
 * [CWOX.IOX(algo)](https://github.com/xie-lin-li/CWOX/blob/main/CWOX/IOX.py): Produces a base heatmap using explanation method named algo. Currently, algo = “Grad-CAM”, “MWP”, “RISE”, or “LIME” are supported.
-
    * [CWOX.grad_cam_cwox](https://github.com/xie-lin-li/CWOX/blob/main/CWOX/grad_cam_cwox.py): Produces a base heatmap with Grad-CAM;
    * [CWOX.excitationbackprop_cwox](https://github.com/xie-lin-li/CWOX/blob/main/CWOX/excitationbackprop_cwox.py): Produces a base heatmap with MWP;
    * [CWOX.rise_cwox](https://github.com/xie-lin-li/CWOX/blob/main/CWOX/rise_cwox.py): Produces a base heatmap with RISE;
    * [CWOX.lime_cwox](https://github.com/xie-lin-li/CWOX/blob/main/CWOX/lime_cwox.py): Produces a base heatmap with LIME.
-
-* [CWOX.CWOX](https://github.com/xie-lin-li/CWOX/blob/main/CWOX/CWOX.py): Produces contrastive heatmaps with CWOX.
+   
+* [CWOX.CWOX_2s](https://github.com/xie-lin-li/CWOX/blob/main/CWOX/CWOX.py): Produces contrastive heatmaps with CWOX-2s.
 * [CWOX.plt_wox.plot_cwox](https://github.com/xie-lin-li/CWOX/blob/main/CWOX/plt_wox.py): Visualize CWOX-2s results.
 
 

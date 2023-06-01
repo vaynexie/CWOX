@@ -211,6 +211,9 @@ The sub-directory [Evaluation](https://github.com/xie-lin-li/CWOX/tree/main/Eval
 
 Application to perform the Contrastive Whole-out Explanation Process. Currently only ResNet50 and GoogleNet for ImageNet Image Classification are supported.
 
-
 See the [README page](https://github.com/xie-lin-li/CWOX/blob/main/CWOX_Explainer/readme.md) in the sub-directory CWOX_Explainer for the guidelines to use the Application.
+
+-------------
+
+Contact: Vayne Xie, wxieai@cse.ust.hk, HKUST.
 

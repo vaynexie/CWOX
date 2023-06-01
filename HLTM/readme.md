@@ -17,23 +17,24 @@ Based on this intuition, we run the classifier on a set of examples, typically t
 ## HLTM Training Data Preparation
 
 **/scripts/prepare_training_data.py:**
-example python code to prepare HLTM training data by running ResNet50 on ImageNet Training Set. The output is a npy file with each row representing the co-occurance of class label (that example output npy file can be downloaded from: https://drive.google.com/file/d/17Um2yv3pPCArWs9HoNOhxHOQQfeBEl-B/view?usp=sharing).
+example python code to prepare HLTM training data by running ResNet50 on ImageNet Training Set. The output is a npy file with each row representing the co-occurance of class label (the example output npy file can be downloaded from: https://drive.google.com/file/d/17Um2yv3pPCArWs9HoNOhxHOQQfeBEl-B/view?usp=sharing).
 
 It is built from the Top K prediction classes of ImageNet training set, where K=#classes with cumulative probability=0.95. One HLTM is built for one model: The first step is to run the model on the training set to get all output probabilities, and then select the Top K classes according to the probabilities (with the cases K=1 removed).
 
-
 ```
 # Examples in the output .npy file
-...
+[...,
 [486,889,202],
 [402,420,546],
-...
+...]
 ```
+The output .npy file is essenitally a list of lists, where the inner lists include the top prediction classes that co-occur in the classification output of an image. For instance, [402,420,546] means that "acoustic guitar, banjo, electric guitar" occurs as the top prediction classes of a training example. The matching relationship between the class id and class name in the ImageNet can be found in [imagenet_class_index.json](https://github.com/vaynexie/CWOX/blob/main/HLTM/scripts/imagenet_class_index.json).
+
+You can also write your own codes to generate the .npy file. The following process can still apply as long as the format of the .npy file you generate is consistent with ours.
+
 
 **/scripts/convert.py:**
 code to convert the .npy file into sparse file format that can processed by the HLTM learning code. 
-
-
 
 -----------------------------------------------------------------------------------------------------------------------
 ## Learning HLTM

@@ -69,6 +69,8 @@ After building the model, a topic tree displayed in a webpage can be built by th
 
 In the above, `output_name` is the name of the output tree, `output_name` is the name of the output such that the resulting topic tree can be opened from the file `output_name.html` and `HLTA-XAI.jar` is the jar library of the HLTA-XAI package.
 
+Mulpile .html, .js, .json will be output after running this command. Users can visualize the tree extracted by checking these files. Among those files, the **output_name_fullname.nodes.json** will be the .json file that is used in the following CWOX-2s. 
+
 -----------------------------------------------------------------------------------------------------------------------
 ## Example Results
 

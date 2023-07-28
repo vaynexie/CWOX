@@ -8,7 +8,7 @@
 </div>
 
 
- **CWOX-2s (Two-Stage Contrastive Whole-output Explanation)**  is a novel explanation framework where one can examine the evidence for competing classes, and thereby obtains contrastive explanations for Image Classification (see [paper](https://proceedings.mlr.press/v216/xie23a/xie23a.pdf) for details and citations).
+ **CWOX-2s (Two-Stage Contrastive Whole-output Explanation)**  is a novel explanation framework where one can examine the evidence for competing classes, and thereby obtains contrastive explanations for Image Classification (see [paper](https://proceedings.mlr.press/v216/xie23a.html) for details and citations).
 
 ---------
 
